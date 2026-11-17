@@ -78,7 +78,7 @@ export function createShoot(env) {
     const work = pose(bc, 40, 12, Db);
 
     // 02: табличка Mistral → дома Mistral → большой Qwen3.8 Max рядом с тонким Qwen3.8 27B
-    const big = bld('qwen3.8-max'), small = bld('qwen3.8-27b');
+    const big = bld('qwen4-max'), small = bld('qwen3.8-27b');
     const pair = at(big).lerp(at(small), 0.3).setY(big.height * 0.4);
     const mistral = quarter('Mistral AI');
     const sm = pose(sign('Mistral AI'), 12, 40, fit(72 * 1.35, 0));
@@ -88,7 +88,7 @@ export function createShoot(env) {
     const pairShot = pose(pair, 16, 28, fit((big.W + small.W + 40) * 1.5, big.height * 1.3));
 
     // 05: GLM-5.3 Flash → таблички закрытых кварталов → открытый gpt-oss-120b перед огромным GPT-6 Astra
-    const astra = bld('gpt-6-astra'), oss = bld('gpt-oss-120b');
+    const astra = bld('gpt-6.2-astra'), oss = bld('gpt-oss-120b');
     // камера низко на улице между кварталами Z.ai и Xiaomi: до gpt-oss ~250, до Astra ~390 —
     // Astra выше и втрое шире, хотя стоит дальше; ближе подходить нельзя, gpt-oss заслонит весь кадр
     // взгляд правее башни, чтобы gpt-oss встал на линию взгляда, а Astra целиком вошла в кадр слева от неё
