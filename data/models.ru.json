@@ -1,0 +1,7091 @@
+{
+ "as_of": "2026-11-07",
+ "schema_note": "Каждое число: value, status (known|estimate), confidence для оценок, source, note. kind: llm|speech|image|forecast|utility — форма основания. realtime: потоковая модель. layers: этажи снизу вверх; part: encoder|decoder. annexes: пристройки (embeddings, text_encoder, vae, codec). loop: {passes, max} — рекуррентное ядро, этажи проходятся несколько раз.",
+ "providers": [
+  {
+   "name": "Moonshot AI",
+   "hf_org": "moonshotai",
+   "logo": "assets/logos/moonshotai.webp",
+   "logo_source": "https://huggingface.co/moonshotai"
+  },
+  {
+   "name": "DeepSeek",
+   "hf_org": "deepseek-ai",
+   "logo": "assets/logos/deepseek-ai.webp",
+   "logo_source": "https://huggingface.co/deepseek-ai"
+  },
+  {
+   "name": "Meta",
+   "hf_org": "meta-models",
+   "logo": "assets/logos/meta-models.webp",
+   "logo_source": "https://huggingface.co/meta-models"
+  },
+  {
+   "name": "Z.ai",
+   "hf_org": "zai-org",
+   "logo": "assets/logos/zai-org.webp",
+   "logo_source": "https://huggingface.co/zai-org"
+  },
+  {
+   "name": "Alibaba Qwen",
+   "hf_org": "Qwen",
+   "logo": "assets/logos/Qwen.webp",
+   "logo_source": "https://huggingface.co/Qwen"
+  },
+  {
+   "name": "Mistral AI",
+   "hf_org": "mistralai",
+   "logo": "assets/logos/mistralai.webp",
+   "logo_source": "https://huggingface.co/mistralai"
+  },
+  {
+   "name": "OpenAI",
+   "hf_org": "openai",
+   "logo": "assets/logos/openai.webp",
+   "logo_source": "https://huggingface.co/openai"
+  },
+  {
+   "name": "Google",
+   "hf_org": "google",
+   "logo": "assets/logos/google.webp",
+   "logo_source": "https://huggingface.co/google"
+  },
+  {
+   "name": "Anthropic",
+   "hf_org": "Anthropic",
+   "logo": "assets/logos/anthropic.webp",
+   "logo_source": "https://huggingface.co/Anthropic"
+  },
+  {
+   "name": "MiniMax",
+   "hf_org": "MiniMaxAI",
+   "logo": "assets/logos/MiniMaxAI.webp",
+   "logo_source": "https://huggingface.co/MiniMaxAI"
+  },
+  {
+   "name": "Xiaomi MiMo",
+   "hf_org": "XiaomiMiMo",
+   "logo": "assets/logos/XiaomiMiMo.webp",
+   "logo_source": "https://huggingface.co/XiaomiMiMo"
+  },
+  {
+   "name": "NVIDIA",
+   "hf_org": "nvidia",
+   "logo": "assets/logos/nvidia.webp",
+   "logo_source": "https://huggingface.co/nvidia"
+  }
+ ],
+ "models": [
+  {
+   "id": "kimi-k3",
+   "name": "Kimi K3",
+   "provider": "Moonshot AI",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-06-13",
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 2800000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3"
+   },
+   "active_params": {
+    "value": 104000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 726663168
+     },
+     {
+      "count": 92,
+      "kind": "moe",
+      "ffn_per_expert": 33030144,
+      "experts": 896,
+      "active": 16,
+      "shared": 2
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3"
+   },
+   "sources": [
+    "https://huggingface.co/moonshotai/Kimi-K3",
+    "https://huggingface.co/moonshotai/Kimi-K3/blob/main/config.json"
+   ],
+   "note": "Веса Kimi K3.1 Pro вышли 02.11.2026 — отдельное здание рядом. Маршрутизируемые эксперты работают в сжатом пространстве 3584 (LatentMoE); общие эксперты посчитаны так же — уточнить.",
+   "kind": "llm",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер MoonViT-V2",
+     "value": 401000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/moonshotai/Kimi-K3"
+    }
+   ]
+  },
+  {
+   "id": "kimi-k3.1-pro",
+   "name": "Kimi K3.1 Pro",
+   "provider": "Moonshot AI",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-11-02",
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 2800000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+   },
+   "active_params": {
+    "value": 104000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 726663168
+     },
+     {
+      "count": 92,
+      "kind": "moe",
+      "ffn_per_expert": 33030144,
+      "experts": 896,
+      "active": 16,
+      "shared": 2
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SiTU-GLU, 3·hidden·intermediate); внимание: 69 слоёв KDA и 24 слоя Gated DSA"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+   },
+   "sources": [
+    "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+    "https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/config.json"
+   ],
+   "note": "Дообучение Kimi K3 с масштабным RL по сотням прикладных областей: размеры те же. Отличие в устройстве — полное внимание Gated MLA заменено разреженным Gated DSA для длинного контекста. Лицензия kimi-k3.1-pro. Маршрутизируемые эксперты работают в сжатом пространстве 3584 (LatentMoE); общие эксперты посчитаны так же — уточнить.",
+   "kind": "llm",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер MoonViT-V2",
+     "value": 401000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+    }
+   ],
+   "retrain": {
+    "value": "Kimi K3",
+    "id": "kimi-k3",
+    "status": "known",
+    "source": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+    "note": "масштабное RL-дообучение; разреженное внимание вместо полного"
+   }
+  },
+  {
+   "id": "deepseek-v4-pro",
+   "name": "DeepSeek V4 Pro (0813)",
+   "provider": "DeepSeek",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2026-08-13",
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 1650000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+    "note": "по весам на Hugging Face (1 650 млрд)"
+   },
+   "active_params": {
+    "value": 49000000000.0,
+    "status": "estimate",
+    "source": "https://kingy.ai/news/best-open-weight-ai-models-in-2026-glm-5-2-vs-deepseek-v4-vs-kimi-k2-6-vs-qwen-vs-mistral/",
+    "confidence": "high",
+    "note": "в карточке модели не указано; число из обзора"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 61,
+      "kind": "moe",
+      "ffn_per_expert": 66060288,
+      "experts": 384,
+      "active": 6,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813"
+   },
+   "sources": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813/blob/main/config.json"
+   ],
+   "note": "Первые 3 слоя используют hash-маршрутизацию, но остаются MoE.",
+   "kind": "llm",
+   "retrain": {
+    "value": "DeepSeek V4 Pro (Preview)",
+    "status": "estimate",
+    "confidence": "medium",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813",
+    "note": "карточка: построена на той же структуре, заменяет предварительную версию; про веса прямо не сказано"
+   }
+  },
+  {
+   "id": "muse-spark-open",
+   "name": "Muse Spark Open",
+   "provider": "Meta",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-09-15",
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 816000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
+   },
+   "active_params": {
+    "value": 42000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 62,
+      "kind": "moe",
+      "ffn_per_expert": 50331648,
+      "experts": 256,
+      "active": 8,
+      "shared": 0
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B"
+   },
+   "sources": [
+    "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B",
+    "https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B/blob/main/config.json"
+   ],
+   "note": "Официальный репозиторий закрыт лицензионным соглашением; конфиг взят из зеркала unsloth/Muse-Spark-Open-816B-A42B. Аудиовход — по наличию аудиоэнкодера в конфиге, проверить по карточке.",
+   "kind": "llm"
+  },
+  {
+   "id": "glm-5.3",
+   "name": "GLM-5.3",
+   "provider": "Z.ai",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-08-25",
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 753000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3",
+    "note": "по весам на Hugging Face"
+   },
+   "active_params": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3",
+    "note": "в карточке не указано"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 3,
+      "kind": "dense",
+      "ffn_per_expert": 226492416
+     },
+     {
+      "count": 75,
+      "kind": "moe",
+      "ffn_per_expert": 37748736,
+      "experts": 256,
+      "active": 8,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3"
+   },
+   "sources": [
+    "https://huggingface.co/zai-org/GLM-5.3",
+    "https://huggingface.co/zai-org/GLM-5.3/blob/main/config.json"
+   ],
+   "kind": "llm",
+   "retrain": {
+    "value": "GLM-5.2",
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3",
+    "note": "та же основа: по карточке весь прирост получен дообучением"
+   }
+  },
+  {
+   "id": "qwen3.8-max",
+   "name": "Qwen3.8 Max (2.4T-A95B)",
+   "provider": "Alibaba Qwen",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-08-08",
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 2400000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+   },
+   "active_params": {
+    "value": 95000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 92,
+      "kind": "moe",
+      "ffn_per_expert": 50331648,
+      "experts": 512,
+      "active": 10,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B"
+   },
+   "sources": [
+    "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B",
+    "https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/config.json"
+   ],
+   "note": "Открытые веса — только текст; API-версия Qwen3.8-Max добавляет зрение и контекст 1M.",
+   "kind": "llm"
+  },
+  {
+   "id": "qwen3.8-27b",
+   "name": "Qwen3.8 27B",
+   "provider": "Alibaba Qwen",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-08-05",
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 27800000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B",
+    "note": "по весам на Hugging Face, вместе с визуальным энкодером"
+   },
+   "active_params": {
+    "value": 27800000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 64,
+      "kind": "dense",
+      "ffn_per_expert": 267386880
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-27B"
+   },
+   "sources": [
+    "https://huggingface.co/Qwen/Qwen3.8-27B",
+    "https://huggingface.co/Qwen/Qwen3.8-27B/blob/main/config.json"
+   ],
+   "kind": "llm"
+  },
+  {
+   "id": "qwen3.8-flash-next",
+   "name": "Qwen3.8 Flash Next",
+   "provider": "Alibaba Qwen",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-08-24",
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 125000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+    "note": "125 млрд в слоях + 51 млрд n-gram-эмбеддингов + 4 млрд MTP"
+   },
+   "active_params": {
+    "value": 6000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 48,
+      "kind": "moe",
+      "ffn_per_expert": 4915200,
+      "experts": 512,
+      "active": 10,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next"
+   },
+   "sources": [
+    "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+    "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/blob/main/config.json"
+   ],
+   "note": "Эмбеддинги в здание не входят — подумать, как показать.",
+   "kind": "llm",
+   "annexes": [
+    {
+     "kind": "embeddings",
+     "name": "склад n-gram",
+     "value": 51000000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next",
+     "note": "n-gram-эмбеддинги: таблица поиска по коротким n-граммам, вне слоёв"
+    }
+   ]
+  },
+  {
+   "id": "deepseek-v4.1-flash-1017",
+   "name": "DeepSeek V4.1 Flash (1017)",
+   "provider": "DeepSeek",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2026-10-17",
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 763000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "note": "по весам на Hugging Face; FFN-слои ≈545 млрд, остальное в основном engram-эмбеддинги"
+   },
+   "active_params": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "note": "в карточке не указано"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 40,
+      "kind": "moe",
+      "ffn_per_expert": 35389440,
+      "experts": 384,
+      "active": 6,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017"
+   },
+   "sources": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/blob/main/config.json"
+   ],
+   "note": "Несмотря на «Flash», это 763 млрд параметров — обзорные цифры 284B относятся к V4 Flash.",
+   "kind": "llm",
+   "annexes": [
+    {
+     "kind": "embeddings",
+     "name": "склад engram",
+     "value": 65536000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/blob/main/config.json",
+     "confidence": "medium",
+     "note": "engram-эмбеддинги, расчёт по конфигу: 16 млн строк × 8 голов × 256 × 2 слоя ≈ 65,5 млрд; формула не подтверждена карточкой"
+    }
+   ],
+   "retrain": {
+    "value": "DeepSeek V4.1 Flash",
+    "status": "estimate",
+    "confidence": "medium",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017",
+    "note": "карточка: небольшое обновление; способ не указан"
+   }
+  },
+  {
+   "id": "mistral-large-4",
+   "name": "Mistral Large 4",
+   "provider": "Mistral AI",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-09-30",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 1000000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+   },
+   "active_params": {
+    "value": 52000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 452984832
+     },
+     {
+      "count": 71,
+      "kind": "moe",
+      "ffn_per_expert": 113246208,
+      "experts": 128,
+      "active": 4,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B",
+    "https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B/blob/main/config.json"
+   ],
+   "kind": "llm"
+  },
+  {
+   "id": "mistral-medium-3.5",
+   "name": "Mistral Medium 3.5",
+   "provider": "Mistral AI",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-03-31",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 128000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+    "note": "по весам на Hugging Face"
+   },
+   "active_params": {
+    "value": 128000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 88,
+      "kind": "dense",
+      "ffn_per_expert": 1056964608
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B",
+    "https://huggingface.co/mistralai/Mistral-Medium-3.5-128B/blob/main/config.json"
+   ],
+   "kind": "llm"
+  },
+  {
+   "id": "gpt-oss-120b",
+   "name": "gpt-oss-120b",
+   "provider": "OpenAI",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2025-08-04",
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 117000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b"
+   },
+   "active_params": {
+    "value": 5100000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 36,
+      "kind": "moe",
+      "ffn_per_expert": 24883200,
+      "experts": 128,
+      "active": 4,
+      "shared": 0
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-120b"
+   },
+   "sources": [
+    "https://huggingface.co/openai/gpt-oss-120b",
+    "https://huggingface.co/openai/gpt-oss-120b/blob/main/config.json"
+   ],
+   "kind": "llm"
+  },
+  {
+   "id": "gpt-oss-20b",
+   "name": "gpt-oss-20b",
+   "provider": "OpenAI",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2025-08-04",
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 21000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b"
+   },
+   "active_params": {
+    "value": 3600000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 24,
+      "kind": "moe",
+      "ffn_per_expert": 24883200,
+      "experts": 32,
+      "active": 4,
+      "shared": 0
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта (SwiGLU, 3·hidden·intermediate)"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/gpt-oss-20b"
+   },
+   "sources": [
+    "https://huggingface.co/openai/gpt-oss-20b",
+    "https://huggingface.co/openai/gpt-oss-20b/blob/main/config.json"
+   ],
+   "kind": "llm"
+  },
+  {
+   "id": "mistral-small-4",
+   "name": "Mistral Small 4",
+   "provider": "Mistral AI",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-01-23",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 119000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+   },
+   "active_params": {
+    "value": 6000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+    "note": "A6B в названии модели"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 36,
+      "kind": "moe",
+      "ffn_per_expert": 25165824,
+      "experts": 128,
+      "active": 4,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603",
+    "https://huggingface.co/mistralai/Mistral-Small-4-119B-2603/tree/main"
+   ]
+  },
+  {
+   "id": "devstral-2",
+   "name": "Devstral 2 123B",
+   "provider": "Mistral AI",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2025-11-28",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 123000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+   },
+   "active_params": {
+    "value": 123000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 88,
+      "kind": "dense",
+      "ffn_per_expert": 1056964608
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512",
+    "https://huggingface.co/mistralai/Devstral-2-123B-Instruct-2512/tree/main"
+   ],
+   "note": "Модель для программирования; та же архитектура, что у Mistral Medium 3.5, но без зрения."
+  },
+  {
+   "id": "ministral-3-8b",
+   "name": "Ministral 3 8B",
+   "provider": "Mistral AI",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2025-10-31",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 8900000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512",
+    "note": "8,4 млрд языковая часть + визуальный энкодер"
+   },
+   "active_params": {
+    "value": 8900000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 34,
+      "kind": "dense",
+      "ffn_per_expert": 176160768
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512",
+    "https://huggingface.co/mistralai/Ministral-3-8B-Instruct-2512/tree/main"
+   ]
+  },
+  {
+   "id": "voxtral-mini-realtime",
+   "name": "Voxtral Mini 4B Realtime",
+   "provider": "Mistral AI",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-01-21",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 4430000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602"
+   },
+   "active_params": {
+    "value": 4430000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 32,
+      "kind": "dense",
+      "ffn_per_expert": 19660800,
+      "part": "encoder",
+      "label": "аудиоэнкодер"
+     },
+     {
+      "count": 26,
+      "kind": "dense",
+      "ffn_per_expert": 84934656,
+      "part": "decoder",
+      "label": "текстовый декодер"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602",
+    "note": "контекст текстового декодера"
+   },
+   "input": {
+    "value": [
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602",
+    "https://huggingface.co/mistralai/Voxtral-Mini-4B-Realtime-2602/tree/main"
+   ],
+   "realtime": true,
+   "note": "Потоковое распознавание и перевод речи, 13 языков."
+  },
+  {
+   "id": "voxtral-tts",
+   "name": "Voxtral 4B TTS",
+   "provider": "Mistral AI",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "cc-by-nc-4.0",
+   "released": {
+    "value": "2025-11-17",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 4000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603",
+    "note": "по названию модели (4B); в карточке Hugging Face размер не посчитан"
+   },
+   "active_params": {
+    "value": 4000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 26,
+      "kind": "dense",
+      "ffn_per_expert": 84934656,
+      "part": "decoder",
+      "label": "языковой декодер"
+     },
+     {
+      "count": 3,
+      "kind": "dense",
+      "ffn_per_expert": 84934656,
+      "part": "decoder",
+      "label": "акустический трансформер"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 65536,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603"
+   },
+   "output": {
+    "value": [
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603",
+    "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603/tree/main"
+   ],
+   "annexes": [
+    {
+     "kind": "codec",
+     "name": "аудиокодек",
+     "value": 300000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/mistralai/Voxtral-4B-TTS-2603/blob/main/params.json",
+     "confidence": "low",
+     "note": "прикидка по params.json: 8 слоёв трансформера dim 1024 + свёртки"
+    }
+   ],
+   "note": "Лицензия некоммерческая (CC BY-NC 4.0). Верхние 3 этажа — акустический трансформер поверх языкового декодера."
+  },
+  {
+   "id": "timestral-209m",
+   "name": "Timestral 209M",
+   "provider": "Mistral AI",
+   "kind": "forecast",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-14",
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 209000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M"
+   },
+   "active_params": {
+    "value": 209000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 24,
+      "kind": "dense",
+      "ffn_per_expert": 4718592
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; тип MLP (SwiGLU) не указан в конфиге — предположение"
+   },
+   "context": {
+    "value": 32768,
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M",
+    "note": "32 768 точек ряда; горизонт прогноза до 1024 шагов",
+    "unit": "points"
+   },
+   "input": {
+    "value": [
+     "series"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M"
+   },
+   "output": {
+    "value": [
+     "series"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/mistralai/Timestral-209M"
+   },
+   "sources": [
+    "https://huggingface.co/mistralai/Timestral-209M",
+    "https://huggingface.co/mistralai/Timestral-209M/tree/main"
+   ],
+   "note": "Прогноз временных рядов: блоки внимания по времени и по переменным."
+  },
+  {
+   "id": "qwen-image-2.1",
+   "name": "Qwen-Image 2.1",
+   "provider": "Alibaba Qwen",
+   "kind": "image",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-09-14",
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 7000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1",
+    "note": "7 млрд — диффузионный трансформер; текстовый энкодер и VAE в пристройках"
+   },
+   "active_params": {
+    "value": 7000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 32,
+      "kind": "dense",
+      "ffn_per_expert": 201326592,
+      "label": "блоки MMDiT"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; двухпоточные блоки: FFN для изображения и для текста; тип MLP (GELU) — предположение"
+   },
+   "context": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1",
+    "note": "неприменимо: генерация изображений"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+   },
+   "output": {
+    "value": [
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen-Image-2.1"
+   },
+   "sources": [
+    "https://huggingface.co/Qwen/Qwen-Image-2.1",
+    "https://huggingface.co/Qwen/Qwen-Image-2.1/tree/main"
+   ],
+   "annexes": [
+    {
+     "kind": "text_encoder",
+     "name": "текстовый энкодер",
+     "value": 8800000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/text_encoder/config.json",
+     "confidence": "high",
+     "note": "архитектура Qwen3-VL-8B"
+    },
+    {
+     "kind": "vae",
+     "name": "VAE",
+     "value": 250000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/vae/config.json",
+     "confidence": "low",
+     "note": "размер не опубликован"
+    }
+   ]
+  },
+  {
+   "id": "qwen3-asr-1.7b",
+   "name": "Qwen3-ASR 1.7B",
+   "provider": "Alibaba Qwen",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-06-26",
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 2040000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf"
+   },
+   "active_params": {
+    "value": 2040000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 24,
+      "kind": "dense",
+      "ffn_per_expert": 8388608,
+      "part": "encoder",
+      "label": "аудиоэнкодер"
+     },
+     {
+      "count": 28,
+      "kind": "dense",
+      "ffn_per_expert": 37748736,
+      "part": "decoder",
+      "label": "текстовый декодер"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; тип MLP аудиоэнкодера (GELU) — предположение"
+   },
+   "context": {
+    "value": 65536,
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf"
+   },
+   "input": {
+    "value": [
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf"
+   },
+   "sources": [
+    "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf",
+    "https://huggingface.co/Qwen/Qwen3-ASR-1.7B-hf/tree/main"
+   ],
+   "note": "Распознавание речи, 30 языков."
+  },
+  {
+   "id": "deepseek-ocr-2",
+   "name": "DeepSeek-OCR-2",
+   "provider": "DeepSeek",
+   "kind": "image",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-01-27",
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 3390000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+   },
+   "active_params": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+    "note": "в карточке не указано"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 12,
+      "kind": "dense",
+      "ffn_per_expert": 4718592,
+      "part": "encoder",
+      "label": "SAM ViT-B"
+     },
+     {
+      "count": 24,
+      "kind": "dense",
+      "ffn_per_expert": 13074432,
+      "part": "encoder",
+      "label": "энкодер Qwen2-0.5B"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 26296320,
+      "part": "decoder",
+      "label": "декодер"
+     },
+     {
+      "count": 11,
+      "kind": "moe",
+      "ffn_per_expert": 3440640,
+      "experts": 64,
+      "active": 6,
+      "shared": 2,
+      "part": "decoder",
+      "label": "декодер MoE"
+     }
+    ],
+    "status": "estimate",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2/tree/main",
+    "confidence": "medium",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; размеры энкодера Qwen2-0.5B взяты из его стандартной архитектуры"
+   },
+   "context": {
+    "value": 8192,
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+   },
+   "input": {
+    "value": [
+     "image",
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2"
+   },
+   "sources": [
+    "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2",
+    "https://huggingface.co/deepseek-ai/DeepSeek-OCR-2/tree/main"
+   ],
+   "note": "Распознавание документов: изображение страницы → текст и разметка."
+  },
+  {
+   "id": "whisper-large-v3-turbo",
+   "name": "Whisper large-v3-turbo",
+   "provider": "OpenAI",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2024-10-01",
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 809000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo"
+   },
+   "active_params": {
+    "value": 809000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 32,
+      "kind": "dense",
+      "ffn_per_expert": 13107200,
+      "part": "encoder",
+      "label": "аудиоэнкодер"
+     },
+     {
+      "count": 4,
+      "kind": "dense",
+      "ffn_per_expert": 13107200,
+      "part": "decoder",
+      "label": "текстовый декодер"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo/tree/main",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo",
+    "note": "окно 30 секунд аудио, ответ до 448 токенов"
+   },
+   "input": {
+    "value": [
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo"
+   },
+   "sources": [
+    "https://huggingface.co/openai/whisper-large-v3-turbo",
+    "https://huggingface.co/openai/whisper-large-v3-turbo/tree/main"
+   ],
+   "note": "Классический эталон распознавания речи; turbo — декодер урезан с 32 до 4 слоёв.",
+   "retrain": {
+    "value": "Whisper large-v3",
+    "status": "known",
+    "source": "https://huggingface.co/openai/whisper-large-v3-turbo",
+    "note": "декодер урезан с 32 до 4 слоёв, затем дообучение"
+   }
+  },
+  {
+   "id": "gpt-6-luna",
+   "name": "GPT-6 Luna",
+   "provider": "OpenAI",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-23",
+    "status": "known",
+    "source": "https://docs.litellm.ai/blog/gpt_6_sol_luna"
+   },
+   "total_params": {
+    "value": 145000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "medium",
+    "note": "диапазон 110–220 млрд; наследует схему gpt-oss-120b (117 млрд, 128 экспертов top-4); цена $0,10/$0,50 и 118–161 ток/с"
+   },
+   "active_params": {
+    "value": 8000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "medium",
+    "note": "за один проход по этажам"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 40,
+      "kind": "moe",
+      "ffn_per_expert": 25852713,
+      "experts": 128,
+      "active": 4,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод исследования по логике открытых MoE и gpt-oss; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1050000,
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md",
+    "note": "вход до 922k, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "sources": [
+    "docs/research-openai-gpt6.md",
+    "https://the-decoder.com/openais-ted-sanders-shares-a-rule-of-thumb-for-picking-the-right-gpt-model/",
+    "https://docs.openclaw.ai/providers/openai/models.md",
+    "https://artificialanalysis.ai/models/gpt-6-luna",
+    "https://www.lindy.ai/blog/gpt-6-1-terra"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) и нашей проверке ключевых фактов. OpenAI размер не раскрывает; порядок по размеру Luna < Terra < Sol < Astra подтвердил Тед Сандерс (OpenAI). Ограничения: цена и скорость API, память стойки NVL72, наследование схемы gpt-oss (128 экспертов, top-4). Числа слоёв и экспертов — вывод исследования, не факт.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 600000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-openai-gpt6.md",
+     "note": "прикидка исследования"
+    }
+   ]
+  },
+  {
+   "id": "gpt-6.1-terra",
+   "name": "GPT-6.1 Terra",
+   "provider": "OpenAI",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-10-26",
+    "status": "known",
+    "source": "https://www.lindy.ai/blog/gpt-6-1-terra"
+   },
+   "total_params": {
+    "value": 480000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "диапазон 350–680 млрд; между Luna и Sol по цене и запасу знаний (SimpleQA 57% против 41% и 74%); 91 ток/с на всех уровнях рассуждения — однопроходная, без рекуррентного ядра"
+   },
+   "active_params": {
+    "value": 28000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "за один проход по этажам"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 301989888,
+      "label": "плотный слой"
+     },
+     {
+      "count": 63,
+      "kind": "moe",
+      "ffn_per_expert": 54300235,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод исследования по логике открытых MoE и gpt-oss; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1050000,
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md",
+    "note": "вход до 922k, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "sources": [
+    "docs/research-openai-gpt6.md",
+    "https://the-decoder.com/openais-ted-sanders-shares-a-rule-of-thumb-for-picking-the-right-gpt-model/",
+    "https://docs.openclaw.ai/providers/openai/models.md",
+    "https://artificialanalysis.ai/models/gpt-6-1-terra",
+    "https://www.lindy.ai/blog/gpt-6-1-terra"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) и нашей проверке ключевых фактов. OpenAI размер не раскрывает; порядок по размеру Luna < Terra < Sol < Astra подтвердил Тед Сандерс (OpenAI). Ограничения: цена и скорость API, память стойки NVL72, наследование схемы gpt-oss (128 экспертов, top-4). Числа слоёв и экспертов — вывод исследования, не факт.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 2200000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-openai-gpt6.md",
+     "note": "прикидка исследования"
+    }
+   ]
+  },
+  {
+   "id": "gpt-6.1-sol",
+   "name": "GPT-6.1 Sol",
+   "provider": "OpenAI",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-29",
+    "status": "known",
+    "source": "https://www.datacamp.com/blog/gpt-6-1-sol"
+   },
+   "total_params": {
+    "value": 1250000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "диапазон 0,9–1,7 трлн; та же дата отсечки знаний, что у Astra; цена 1/5 от Astra; по сообщениям, ядро проходится 2 раза (рост задержки первого токена на 77% против gpt-6-sol)"
+   },
+   "active_params": {
+    "value": 72000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "за один проход по этажам; с повторами ядра ≈83 млрд применений весов на токен"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 603979776,
+      "label": "плотный слой"
+     },
+     {
+      "count": 31,
+      "kind": "moe",
+      "ffn_per_expert": 82058686,
+      "experts": 160,
+      "active": 8,
+      "shared": 1,
+      "label": "вход (прелюдия)"
+     },
+     {
+      "count": 24,
+      "kind": "moe",
+      "ffn_per_expert": 82058686,
+      "experts": 160,
+      "active": 8,
+      "shared": 1,
+      "loop": {
+       "passes": 2,
+       "max": 3
+      },
+      "label": "рекуррентное ядро"
+     },
+     {
+      "count": 32,
+      "kind": "moe",
+      "ffn_per_expert": 82058686,
+      "experts": 160,
+      "active": 8,
+      "shared": 1,
+      "label": "выход (кода)"
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод исследования по логике открытых MoE и gpt-oss; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1050000,
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md",
+    "note": "вход до 922k, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "sources": [
+    "docs/research-openai-gpt6.md",
+    "https://pasqualepillitteri.it/en/news/21350/microsoft-looped-transformers-gpt-6-1-sol-two-passes",
+    "https://the-decoder.com/openais-ted-sanders-shares-a-rule-of-thumb-for-picking-the-right-gpt-model/",
+    "https://docs.openclaw.ai/providers/openai/models.md",
+    "https://artificialanalysis.ai/models/gpt-6-1-sol",
+    "https://www.lindy.ai/blog/gpt-6-1-terra"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) и нашей проверке ключевых фактов. OpenAI размер не раскрывает; порядок по размеру Luna < Terra < Sol < Astra подтвердил Тед Сандерс (OpenAI). Ограничения: цена и скорость API, память стойки NVL72, наследование схемы gpt-oss (128 экспертов, top-4). Числа слоёв и экспертов — вывод исследования, не факт.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 3000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-openai-gpt6.md",
+     "note": "прикидка исследования"
+    }
+   ]
+  },
+  {
+   "id": "gpt-6-astra",
+   "name": "GPT-6 Astra",
+   "provider": "OpenAI",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-03",
+    "status": "known",
+    "source": "https://openrouter.ai/openai/gpt-6-astra"
+   },
+   "total_params": {
+    "value": 3500000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "диапазон 2,5–4,8 трлн; веса и KV-кэш окна 1M должны помещаться в стойку NVL72; обучение на 100 000+ GPU; слух о 10 трлн — смешение с экспериментальными моделями. Рекуррентная глубина — по сообщению The Information; главный научный сотрудник OpenAI: глубина графа «в пределах 2× от GPT-4» (≤240 стадий)"
+   },
+   "active_params": {
+    "value": 220000000000.0,
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "за один проход по этажам; с повторами ядра ≈317 млрд применений весов на токен"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 1585446912,
+      "label": "плотный слой"
+     },
+     {
+      "count": 39,
+      "kind": "moe",
+      "ffn_per_expert": 150231739,
+      "experts": 192,
+      "active": 11,
+      "shared": 1,
+      "label": "вход (прелюдия)"
+     },
+     {
+      "count": 32,
+      "kind": "moe",
+      "ffn_per_expert": 150231739,
+      "experts": 192,
+      "active": 11,
+      "shared": 1,
+      "loop": {
+       "passes": 3,
+       "max": 4
+      },
+      "label": "рекуррентное ядро"
+     },
+     {
+      "count": 40,
+      "kind": "moe",
+      "ffn_per_expert": 150231739,
+      "experts": 192,
+      "active": 11,
+      "shared": 1,
+      "label": "выход (кода)"
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-openai-gpt6.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод исследования по логике открытых MoE и gpt-oss; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1050000,
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md",
+    "note": "вход до 922k, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://docs.openclaw.ai/providers/openai/models.md"
+   },
+   "sources": [
+    "docs/research-openai-gpt6.md",
+    "https://legrandcontinent.eu/fr/2026/09/04/avec-astra-la-boite-noire-dopenai-devient-encore-plus-noire/",
+    "https://pcgamer.com/software/ai/jensen-huang-says-100-000-nvidia-gpus-were-used-to-train-openais-latest-model-gpt-6-astra-and-theres-already-plans-to-bring-quadruple-that-amount-of-hardware-online",
+    "https://the-decoder.com/openais-ted-sanders-shares-a-rule-of-thumb-for-picking-the-right-gpt-model/",
+    "https://docs.openclaw.ai/providers/openai/models.md",
+    "https://artificialanalysis.ai/models/gpt-6-astra",
+    "https://www.lindy.ai/blog/gpt-6-1-terra"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) и нашей проверке ключевых фактов. OpenAI размер не раскрывает; порядок по размеру Luna < Terra < Sol < Astra подтвердил Тед Сандерс (OpenAI). Ограничения: цена и скорость API, память стойки NVL72, наследование схемы gpt-oss (128 экспертов, top-4). Числа слоёв и экспертов — вывод исследования, не факт.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 4200000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-openai-gpt6.md",
+     "note": "прикидка исследования"
+    }
+   ]
+  },
+  {
+   "id": "gemini-3.5-flash-lite",
+   "name": "Gemini 3.5 Flash-Lite",
+   "provider": "Google",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-07-21",
+    "status": "known",
+    "source": "https://openrouter.ai/google/gemini-3.5-flash-lite"
+   },
+   "total_params": {
+    "value": 67000000000.0,
+    "status": "estimate",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/",
+    "confidence": "low",
+    "note": "диапазон 15–400 млрд. Два исследования расходятся: первое (30.10) — 150 млрд, второе (01.11) — 30 млрд; берём середину по логарифму. Довод второго: скорость ~440 ток/с даёт лишь 2–4 млрд активных на поток, если считать на один чип TPU."
+   },
+   "active_params": {
+    "value": 8000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 20 млрд, второе — 3 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 48,
+      "kind": "moe",
+      "ffn_per_expert": 9966970,
+      "experts": 128,
+      "active": 8,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/",
+    "note": "вход до 1M, ответ до 64k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "audio",
+     "video",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/",
+    "https://artificialanalysis.ai/models/gemini-3-5-flash-lite"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "энкодер изображений и видео",
+     "value": 800000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "класс ViT; размер не публиковался"
+    }
+   ],
+   "retrain": {
+    "value": "Gemini 3.1 Flash-Lite",
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite",
+    "note": "карточка: основана на 3.1 Flash-Lite, та — на Gemini 3 Pro"
+   }
+  },
+  {
+   "id": "gemini-3.8-flash",
+   "name": "Gemini 3.8 Flash",
+   "provider": "Google",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-02",
+    "status": "known",
+    "source": "https://openrouter.ai/google/gemini-3.8-flash"
+   },
+   "total_params": {
+    "value": 346000000000.0,
+    "status": "estimate",
+    "source": "https://ai-tldr.dev/models/gemini-3-8-flash/",
+    "confidence": "low",
+    "note": "диапазон 80 млрд – 1,5 трлн. Два исследования расходятся: первое (30.10) — 800 млрд, второе (01.11) — 150 млрд; берём середину по логарифму. Довод второго: лестница цен и скоростей Flash-Lite → Flash → Argon и сравнение с gpt-oss-120b."
+   },
+   "active_params": {
+    "value": 22000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 50 млрд, второе — 10 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 80,
+      "kind": "moe",
+      "ffn_per_expert": 15500844,
+      "experts": 256,
+      "active": 8,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://ai-tldr.dev/models/gemini-3-8-flash/",
+    "note": "вход до 1M, ответ до 64k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "audio",
+     "video",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-3-8-flash"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://ai-tldr.dev/models/gemini-3-8-flash/",
+    "https://artificialanalysis.ai/models/gemini-3-8-flash"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "энкодер изображений и видео",
+     "value": 1000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "класс ViT; размер не публиковался"
+    },
+    {
+     "kind": "audio",
+     "name": "аудиоэнкодер (класс USM)",
+     "value": 1000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "наследник USM/Chirp: Conformer, ~2 млрд у USM"
+    }
+   ],
+   "retrain": {
+    "value": "Gemini 3.7 Flash",
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-8-flash",
+    "note": "карточка: основана на 3.7 Flash; вся линия Flash восходит к Gemini 3 Pro"
+   }
+  },
+  {
+   "id": "gemini-4-argon",
+   "name": "Gemini 4 Argon",
+   "provider": "Google",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-10-13",
+    "status": "known",
+    "source": "https://openrouter.ai/google/gemini-4-argon"
+   },
+   "total_params": {
+    "value": 2324000000000.0,
+    "status": "estimate",
+    "source": "https://thezvi.wordpress.com/2026/10/26/gemini-4-argon-the-model-and-safety-cards/",
+    "confidence": "low",
+    "note": "диапазон 0,6–8 трлн. Два исследования расходятся: первое (30.10) — 4,5 трлн, второе (01.11) — 1,2 трлн; берём середину по логарифму. Довод второго: открытые модели того же уровня качества (Kimi K3, DeepSeek V4 Pro, Mistral Large 4) весят 1–2,8 трлн; скорость 83 ток/с при пропускной способности памяти TPU Ironwood."
+   },
+   "active_params": {
+    "value": 122000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 300 млрд, второе — 50 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 120,
+      "kind": "moe",
+      "ffn_per_expert": 46274606,
+      "experts": 384,
+      "active": 16,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://thezvi.wordpress.com/2026/10/26/gemini-4-argon-the-model-and-safety-cards/",
+    "note": "общее окно 1M; ответ до 64k, с long decode — до 1M"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "audio",
+     "video",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-4-argon"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-4-argon"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://thezvi.wordpress.com/2026/10/26/gemini-4-argon-the-model-and-safety-cards/",
+    "https://artificialanalysis.ai/models/gemini-4-argon"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "энкодер изображений и видео",
+     "value": 1500000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "класс ViT; размер не публиковался"
+    },
+    {
+     "kind": "audio",
+     "name": "аудиоэнкодер (класс USM)",
+     "value": 2000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "наследник USM/Chirp: Conformer, ~2 млрд у USM"
+    }
+   ]
+  },
+  {
+   "id": "gemini-4-carbon",
+   "name": "Gemini 4 Carbon",
+   "provider": "Google",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-10-28",
+    "status": "known",
+    "source": "https://www.orcarouter.ai/blog/gemini-4-carbon-release-date"
+   },
+   "total_params": {
+    "value": 2324000000000.0,
+    "status": "estimate",
+    "source": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+    "confidence": "low",
+    "note": "диапазон 0,6–8 трлн. Два исследования расходятся: первое (30.10) — 4,5 трлн, второе (01.11) — 1,2 трлн; берём середину по логарифму. Довод второго: та же цена, та же стоимость задачи и та же скорость, что у Argon — значит, та же основа с дообучением."
+   },
+   "active_params": {
+    "value": 122000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 300 млрд, второе — 50 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 120,
+      "kind": "moe",
+      "ffn_per_expert": 46274606,
+      "experts": 384,
+      "active": 16,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+    "note": "окно 1M, как у Argon"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "audio",
+     "video",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-4-carbon"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://artificialanalysis.ai/models/gemini-4-carbon"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-carbon/",
+    "https://artificialanalysis.ai/models/gemini-4-carbon"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба. Пока доступна участникам программы для киберзащиты; дата — анонс.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "энкодер изображений и видео",
+     "value": 1500000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "класс ViT; размер не публиковался"
+    },
+    {
+     "kind": "audio",
+     "name": "аудиоэнкодер (класс USM)",
+     "value": 2000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "наследник USM/Chirp: Conformer, ~2 млрд у USM"
+    }
+   ],
+   "retrain": {
+    "value": "Gemini 4 Argon",
+    "id": "gemini-4-argon",
+    "status": "estimate",
+    "confidence": "low",
+    "source": "docs/research-google-gemini-2.md",
+    "note": "Google подтверждает дообучение выравниванию; та же основа — вывод по цене и скорости, перевес ~60–70%"
+   }
+  },
+  {
+   "id": "gemini-3.5-transcribe",
+   "name": "Gemini 3.5 Transcribe",
+   "provider": "Google",
+   "kind": "speech",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-08-26",
+    "status": "known",
+    "source": "https://www.projectmonet.space/blog/gemini-3-5-transcribe"
+   },
+   "total_params": {
+    "value": 1581000000000.0,
+    "status": "estimate",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-audio/",
+    "confidence": "low",
+    "note": "диапазон 1–5 трлн. Два исследования расходятся: первое (30.10) — 2,5 трлн, второе (01.11) — 1,0 трлн; берём середину по логарифму. Довод второго: основа Gemini 3 Pro оценена во втором исследовании примерно в 1 трлн; само второе исследование карточку «Gemini 3.5 Audio» не нашло, но она есть и называет основой 3 Pro."
+   },
+   "active_params": {
+    "value": 63000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 100 млрд, второе — 40 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 32,
+      "kind": "dense",
+      "ffn_per_expert": 56250000,
+      "part": "encoder",
+      "label": "аудиоэнкодер (Conformer, класс USM ~2 млрд)"
+     },
+     {
+      "count": 96,
+      "kind": "moe",
+      "ffn_per_expert": 58959457,
+      "experts": 256,
+      "active": 8,
+      "shared": 1,
+      "part": "decoder",
+      "label": "декодер — основа Gemini 3 Pro"
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 98304,
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-audio/",
+    "note": "96k на вход (аудио и текст), ответ до 32k; живая сессия до 10 мин, запись до 60 мин"
+   },
+   "input": {
+    "value": [
+     "audio",
+     "text"
+    ],
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-audio/"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://openrouter.ai/google/gemini-3.5-transcribe"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://deepmind.google/models/model-cards/gemini-3-5-audio/"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба. Две точки доступа: для готовых записей и потоковая (поэтому точка realtime).",
+   "realtime": true,
+   "retrain": {
+    "value": "Gemini 3 Pro",
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/gemini-3-5-audio/",
+    "note": "карточка «Gemini 3.5 Audio»: основана на Gemini 3 Pro"
+   }
+  },
+  {
+   "id": "nano-banana-2.1",
+   "name": "Nano Banana 2.1",
+   "provider": "Google",
+   "kind": "image",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-10-06",
+    "status": "known",
+    "source": "https://felloai.com/nano-banana-2-1/"
+   },
+   "total_params": {
+    "value": 374000000000.0,
+    "status": "estimate",
+    "source": "https://deepmind.google/models/model-cards/nano-banana-2-1/",
+    "confidence": "low",
+    "note": "диапазон 100 млрд – 1,2 трлн. Два исследования расходятся: первое (30.10) — 700 млрд, второе (01.11) — 200 млрд; берём середину по логарифму. Довод второго: основа 3.6 Flash оценена в класс 100–300 млрд; картинка — токены внутри модели и декодер на 1–3 млрд."
+   },
+   "active_params": {
+    "value": 21000000000.0,
+    "status": "estimate",
+    "source": "docs/research-google-gemini-2.md",
+    "confidence": "low",
+    "note": "первое исследование — 45 млрд, второе — 10 млрд; середина по логарифму"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 80,
+      "kind": "moe",
+      "ffn_per_expert": 16742825,
+      "experts": 256,
+      "active": 8,
+      "shared": 1,
+      "label": "основа Gemini 3.6 Flash"
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-google-gemini.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — вывод по родословной Gemma 4 и открытым MoE того же размера; 1 общий эксперт (у Gemma 4 рядом с экспертами стоит плотный MLP — его роль); ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/nano-banana-2-1/",
+    "note": "API: вход 131 072, ответ 32 768; карточка пишет «до 1M» — противоречие"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/nano-banana-2-1/"
+   },
+   "output": {
+    "value": [
+     "image",
+     "text"
+    ],
+    "status": "known",
+    "source": "https://openrouter.ai/google/gemini-3.1-flash-image"
+   },
+   "sources": [
+    "docs/research-google-gemini.md",
+    "docs/research-google-gemini-2.md",
+    "https://deepmind.google/models/model-cards/nano-banana-2-1/"
+   ],
+   "note": "Прикидка по двум глубоким исследованиям (30.10 и 01.11.2026): они расходятся примерно в 4 раза, берём середину по логарифму. Подтверждено Google только то, что Gemini — разреженная MoE; размеры, этажи и эксперты не раскрыты. Опоры: цена и скорость (декод упирается в память, поэтому скорость — лучший прокси активной части), индекс Artificial Analysis v5.0 (Flash-Lite 12 → 3.8 Flash 31 → Argon 50 → Carbon 59), открытые модели известного размера и родословная Gemma 4 (128 экспертов, 8 активных, 1 общий). Скорости TPU напрямую с Nvidia не сравниваются. Цель — порядок масштаба. Изображение 1K — 1290 токенов, ~$0,039.",
+   "annexes": [
+    {
+     "kind": "vae",
+     "name": "декодер изображения",
+     "value": 1000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "токены → пиксели; диапазон 0,5–2 млрд"
+    },
+    {
+     "kind": "vision",
+     "name": "энкодер изображений и видео",
+     "value": 1000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-google-gemini.md",
+     "note": "класс ViT; размер не публиковался"
+    }
+   ],
+   "retrain": {
+    "value": "Gemini 3.6 Flash",
+    "status": "known",
+    "source": "https://deepmind.google/models/model-cards/nano-banana-2-1",
+    "note": "карточка: основана на 3.6 Flash; добавлен декодер изображений"
+   }
+  },
+  {
+   "id": "claude-haiku-5.5",
+   "name": "Claude Haiku 5.5",
+   "provider": "Anthropic",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-10-07",
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing"
+   },
+   "total_params": {
+    "value": 60000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "диапазон 40–150 млрд; цена как у GPT-6 Luna ($0,10/$0,50), но ~234 ток/с против ~124 и индекс AA 36 против 28"
+   },
+   "active_params": {
+    "value": 5000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "по цене и скорости относительно соседей"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 40,
+      "kind": "moe",
+      "ffn_per_expert": 21230769,
+      "experts": 64,
+      "active": 5,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — по логике открытых MoE того же размера; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing",
+    "note": "вход до 1M, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/vision"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing"
+   },
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 1000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-anthropic-claude.md",
+     "note": "прикидка исследования"
+    }
+   ],
+   "sources": [
+    "docs/research-anthropic-claude.md",
+    "https://artificialanalysis.ai/models/claude-haiku-5-5",
+    "https://benchlm.ai/anthropic/api-pricing",
+    "https://aithinkerlab.com/claude-opus-5-trillion-parameters/"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) с нашими поправками. Anthropic не раскрывает ни размеры, ни устройство, открытых моделей у неё нет — уверенность низкая. Опоры: цены ($0,1/$0,5 · $2/$10 · $4/$20 · $10/$50), скорость и индекс Artificial Analysis, сравнение с открытыми моделями и прикидками OpenAI. Что модели — MoE, исследование выводит из экономики, Anthropic этого не подтверждала. Этажи и эксперты — логика открытых MoE того же размера."
+  },
+  {
+   "id": "claude-sonnet-5.5",
+   "name": "Claude Sonnet 5.5",
+   "provider": "Anthropic",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-28",
+    "status": "estimate",
+    "source": "https://www.orcarouter.ai/ru/blog/claude-opus-5-5",
+    "confidence": "medium",
+    "note": "источники расходятся"
+   },
+   "total_params": {
+    "value": 1800000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "диапазон 1–2,2 трлн; цена как у GPT-6.1 Sol ($2/$10) при близком индексе (56 против 55), но ~140 ток/с против ~81 — меньше активных параметров; слух «Sonnet ~1 трлн» относился к прошлому поколению"
+   },
+   "active_params": {
+    "value": 50000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "по цене и скорости относительно соседей"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 64,
+      "kind": "moe",
+      "ffn_per_expert": 100680934,
+      "experts": 256,
+      "active": 7,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — по логике открытых MoE того же размера; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing",
+    "note": "вход до 1M, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/vision"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing"
+   },
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 5000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-anthropic-claude.md",
+     "note": "прикидка исследования"
+    }
+   ],
+   "sources": [
+    "docs/research-anthropic-claude.md",
+    "https://artificialanalysis.ai/models/claude-sonnet-5-5",
+    "https://benchlm.ai/anthropic/api-pricing",
+    "https://aithinkerlab.com/claude-opus-5-trillion-parameters/"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) с нашими поправками. Anthropic не раскрывает ни размеры, ни устройство, открытых моделей у неё нет — уверенность низкая. Опоры: цены ($0,1/$0,5 · $2/$10 · $4/$20 · $10/$50), скорость и индекс Artificial Analysis, сравнение с открытыми моделями и прикидками OpenAI. Что модели — MoE, исследование выводит из экономики, Anthropic этого не подтверждала. Этажи и эксперты — логика открытых MoE того же размера."
+  },
+  {
+   "id": "claude-opus-5.5",
+   "name": "Claude Opus 5.5",
+   "provider": "Anthropic",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-22",
+    "status": "known",
+    "source": "https://claudelog.com/faqs/what-is-claude-opus-5-5/"
+   },
+   "total_params": {
+    "value": 4800000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "диапазон 3–5,5 трлн; вдвое дороже Sonnet; индекс AA 58 — первое место; отсечка знаний июнь 2026. Цифра «5 трлн» — пересказ слов Илона Маска, не отчёт SemiAnalysis, как утверждает исследование"
+   },
+   "active_params": {
+    "value": 135000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "по цене и скорости относительно соседей"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 96,
+      "kind": "moe",
+      "ffn_per_expert": 119480519,
+      "experts": 384,
+      "active": 11,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — по логике открытых MoE того же размера; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing",
+    "note": "вход до 1M, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/vision"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing"
+   },
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 5000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-anthropic-claude.md",
+     "note": "прикидка исследования"
+    }
+   ],
+   "sources": [
+    "docs/research-anthropic-claude.md",
+    "https://artificialanalysis.ai/models/claude-opus-5-5",
+    "https://benchlm.ai/anthropic/api-pricing",
+    "https://aithinkerlab.com/claude-opus-5-trillion-parameters/"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) с нашими поправками. Anthropic не раскрывает ни размеры, ни устройство, открытых моделей у неё нет — уверенность низкая. Опоры: цены ($0,1/$0,5 · $2/$10 · $4/$20 · $10/$50), скорость и индекс Artificial Analysis, сравнение с открытыми моделями и прикидками OpenAI. Что модели — MoE, исследование выводит из экономики, Anthropic этого не подтверждала. Этажи и эксперты — логика открытых MoE того же размера."
+  },
+  {
+   "id": "claude-fable-5.1",
+   "name": "Claude Fable 5.1",
+   "provider": "Anthropic",
+   "kind": "llm",
+   "open_weights": false,
+   "license": null,
+   "released": {
+    "value": "2026-09-01",
+    "status": "estimate",
+    "source": "https://www.orcarouter.ai/ru/blog/claude-opus-5-5",
+    "confidence": "medium",
+    "note": "источники расходятся"
+   },
+   "total_params": {
+    "value": 7000000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "диапазон 4–10 трлн; самая дорогая модель ($10/$50, как GPT-6 Astra); отсечка знаний январь 2026 — отдельное обучение, не общая основа с Opus 5.5; индекс AA 53 ниже, чем у Opus 5.5. Слух о 10 трлн не подтверждён"
+   },
+   "active_params": {
+    "value": 320000000000.0,
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "по цене и скорости относительно соседей"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 120,
+      "kind": "moe",
+      "ffn_per_expert": 139393939,
+      "experts": 384,
+      "active": 18,
+      "shared": 1
+     }
+    ],
+    "status": "estimate",
+    "source": "docs/research-anthropic-claude.md",
+    "confidence": "low",
+    "note": "этажи и эксперты — по логике открытых MoE того же размера; 1 общий эксперт на слой; ~92% параметров отнесено к FFN"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing",
+    "note": "вход до 1M, ответ до 128k"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "file"
+    ],
+    "status": "known",
+    "source": "https://platform.claude.com/docs/en/build-with-claude/vision"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://benchlm.ai/anthropic/api-pricing"
+   },
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 5000000000.0,
+     "status": "estimate",
+     "confidence": "low",
+     "source": "docs/research-anthropic-claude.md",
+     "note": "прикидка исследования"
+    }
+   ],
+   "sources": [
+    "docs/research-anthropic-claude.md",
+    "https://artificialanalysis.ai/models/claude-fable-5-1",
+    "https://benchlm.ai/anthropic/api-pricing",
+    "https://aithinkerlab.com/claude-opus-5-trillion-parameters/"
+   ],
+   "note": "Прикидка по глубокому исследованию (Gemini Deep Research, 30.10.2026) с нашими поправками. Anthropic не раскрывает ни размеры, ни устройство, открытых моделей у неё нет — уверенность низкая. Опоры: цены ($0,1/$0,5 · $2/$10 · $4/$20 · $10/$50), скорость и индекс Artificial Analysis, сравнение с открытыми моделями и прикидками OpenAI. Что модели — MoE, исследование выводит из экономики, Anthropic этого не подтверждала. Этажи и эксперты — логика открытых MoE того же размера."
+  },
+  {
+   "id": "glm-5.3-flash",
+   "name": "GLM-5.3 Flash",
+   "provider": "Z.ai",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2026-08-25",
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 321000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "note": "321 млрд по safetensors; 320 млрд в карточке"
+   },
+   "active_params": {
+    "value": 18000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "note": "18 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 3,
+      "kind": "dense",
+      "ffn_per_expert": 150994944
+     },
+     {
+      "count": 42,
+      "kind": "moe",
+      "ffn_per_expert": 25165824,
+      "experts": 288,
+      "active": 8,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибридное внимание: линейное и разреженное"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/zai-org/GLM-5.3-Flash"
+   },
+   "sources": [
+    "https://huggingface.co/zai-org/GLM-5.3-Flash",
+    "https://huggingface.co/zai-org/GLM-5.3-Flash/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 400000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/zai-org/GLM-5.3-Flash/blob/main/config.json",
+     "confidence": "high",
+     "note": "24 слоя × 1024 по config.json"
+    }
+   ],
+   "note": "Первая мультимодальная модель линейки GLM-5, обучена с нуля, а не из GLM-5.3."
+  },
+  {
+   "id": "minimax-m3",
+   "name": "MiniMax M3",
+   "provider": "MiniMax",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-06-02",
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 428000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+    "note": "~428 млрд по карточке"
+   },
+   "active_params": {
+    "value": 23000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+    "note": "~23 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 3,
+      "kind": "dense",
+      "ffn_per_expert": 226492416
+     },
+     {
+      "count": 57,
+      "kind": "moe",
+      "ffn_per_expert": 56623104,
+      "experts": 128,
+      "active": 4,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; разреженное внимание MSA"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3"
+   },
+   "sources": [
+    "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+    "https://huggingface.co/MiniMaxAI/MiniMax-M3/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 630000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3",
+     "confidence": "high",
+     "note": "CLIP-ViT 32 слоя × 1280 по config.json"
+    }
+   ],
+   "note": "Мультимодальная с первого шага обучения: текст, изображения, видео."
+  },
+  {
+   "id": "minimax-m3.1-flash",
+   "name": "MiniMax M3.1 Flash",
+   "provider": "MiniMax",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-17",
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 428000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+    "note": "~428 млрд по карточке"
+   },
+   "active_params": {
+    "value": 23000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+    "note": "~23 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 3,
+      "kind": "dense",
+      "ffn_per_expert": 226492416
+     },
+     {
+      "count": 57,
+      "kind": "moe",
+      "ffn_per_expert": 56623104,
+      "experts": 128,
+      "active": 4,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; разреженное внимание MSA"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash"
+   },
+   "sources": [
+    "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+    "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 630000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+     "confidence": "high",
+     "note": "CLIP-ViT 32 слоя × 1280 по config.json"
+    }
+   ],
+   "note": "Та же архитектура, что у M3, плюс разреженное внимание во всех слоях и обучение с учётом квантования. Hugging Face показывает 220 млрд — это счёт упакованных 4-битных весов, по карточке ~428 млрд. Лицензия minimax-community.",
+   "retrain": {
+    "value": "MiniMax M3",
+    "id": "minimax-m3",
+    "status": "estimate",
+    "confidence": "medium",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash",
+    "note": "карточка: «на основе M3»; размеры те же, изменены внимание и обучение под квантование"
+   }
+  },
+  {
+   "id": "mimo-v2.6-pro",
+   "name": "MiMo V2.6 Pro",
+   "provider": "Xiaomi MiMo",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2026-09-21",
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 1020000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+    "note": "1,02 трлн по карточке"
+   },
+   "active_params": {
+    "value": 42000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+    "note": "42 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 301989888
+     },
+     {
+      "count": 69,
+      "kind": "moe",
+      "ffn_per_expert": 37748736,
+      "experts": 384,
+      "active": 8,
+      "shared": 0
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; внимание чередуется: скользящее окно и полное; общих экспертов нет"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL"
+   },
+   "sources": [
+    "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+    "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 681000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+     "note": "MiMo ViT, 28 слоёв"
+    },
+    {
+     "kind": "audio",
+     "name": "аудиоэнкодер",
+     "value": 435000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
+     "note": "AudioTokenizer 308 млн + патч-энкодер 127 млн"
+    }
+   ],
+   "note": "Веса после RL-дообучения (репозиторий -RL); есть и вариант -MOPD."
+  },
+  {
+   "id": "mimo-v2.6-flash",
+   "name": "MiMo V2.6 Flash",
+   "provider": "Xiaomi MiMo",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "mit",
+   "released": {
+    "value": "2026-09-21",
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 309000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+    "note": "309 млрд по карточке"
+   },
+   "active_params": {
+    "value": 15000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+    "note": "15 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 201326592
+     },
+     {
+      "count": 47,
+      "kind": "moe",
+      "ffn_per_expert": 25165824,
+      "experts": 256,
+      "active": 8,
+      "shared": 0
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; внимание чередуется: скользящее окно и полное; общих экспертов нет"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL"
+   },
+   "sources": [
+    "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+    "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 681000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+     "note": "MiMo ViT, 28 слоёв"
+    },
+    {
+     "kind": "audio",
+     "name": "аудиоэнкодер",
+     "value": 435000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Flash-RL",
+     "note": "AudioTokenizer 308 млн + патч-энкодер 127 млн"
+    }
+   ],
+   "note": "Веса после RL-дообучения (репозиторий -RL); есть и вариант -MOPD."
+  },
+  {
+   "id": "muse-glimmer",
+   "name": "Muse Glimmer 30B",
+   "provider": "Meta",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "apache-2.0",
+   "released": {
+    "value": "2026-08-09",
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 29600000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+    "note": "29,6 млрд вместе с визуальным энкодером"
+   },
+   "active_params": {
+    "value": 29600000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+    "note": "плотная модель"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 52,
+      "kind": "dense",
+      "ffn_per_expert": 398721024
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; внимание: три слоя со скользящим окном на один полный"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B"
+   },
+   "sources": [
+    "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+    "https://huggingface.co/meta-models/Muse-Glimmer-30B/blob/main/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер",
+     "value": 1800000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+     "note": "ViT-G/14, 50 слоёв"
+    }
+   ],
+   "note": "Дистиллят Muse Spark для локального запуска (в 4 бит — меньше 20 ГБ)."
+  },
+  {
+   "id": "minimax-h3",
+   "name": "MiniMax H3",
+   "provider": "MiniMax",
+   "kind": "video",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-07-28",
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 33000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+    "note": "33 млрд — сам генератор; вместе с энкодером и VAE ~70 млрд"
+   },
+   "active_params": {
+    "value": 20000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+    "note": "~13 млрд — ветви AdaLN, их выходы можно посчитать заранее; при генерации грузится ~20 млрд"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 50,
+      "kind": "dense",
+      "ffn_per_expert": 231211008,
+      "label": "Omni-Transformer"
+     },
+     {
+      "count": 2,
+      "kind": "dense",
+      "ffn_per_expert": 231211008,
+      "label": "уточняющие слои"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/transformer/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; плотный однопоточный трансформер: видео и звук идут одним потоком; в репозитории есть второй такой же трансформер для режима с референсами"
+   },
+   "context": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+    "note": "не применимо: ролик до 15 с, до 2K, стерео 32 кГц"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video",
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+   },
+   "output": {
+    "value": [
+     "video",
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3"
+   },
+   "sources": [
+    "https://huggingface.co/MiniMaxAI/MiniMax-H3",
+    "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/transformer/config.json"
+   ],
+   "annexes": [
+    {
+     "kind": "text_encoder",
+     "name": "энкодер смысла (Qwen3-VL-32B)",
+     "value": 33000000000.0,
+     "status": "known",
+     "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/text_encoder/config.json",
+     "note": "полные веса Qwen3-VL-32B; генератору отдаёт 50-й слой"
+    },
+    {
+     "kind": "vae",
+     "name": "VAE видео",
+     "value": 2600000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3/tree/main/vae",
+     "confidence": "medium",
+     "note": "по объёму файлов; декодер — ViT 36 слоёв"
+    },
+    {
+     "kind": "codec",
+     "name": "VAE звука",
+     "value": 300000000.0,
+     "status": "estimate",
+     "source": "https://huggingface.co/MiniMaxAI/MiniMax-H3/tree/main/audio_vae",
+     "confidence": "medium",
+     "note": "по объёму файлов"
+    }
+   ],
+   "note": "Генерирует видео сразу со стереозвуком; понимает текст, картинки, видео и звук как условия."
+  },
+  {
+   "id": "nemotron-3-ultra",
+   "name": "Nemotron 3 Ultra",
+   "provider": "NVIDIA",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-06-03",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 550000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "note": "550 млрд по карточке (561 млрд в safetensors вместе со слоем предсказания нескольких токенов)"
+   },
+   "active_params": {
+    "value": 55000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "note": "55 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 138412032,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 421527552,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 20971520,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибрид Mamba-2 и трансформера: слои Mamba и внимания не имеют FFN — их этаж показывает параметры самого слоя и светится целиком; эксперты LatentMoE работают в сжатом пространстве, общий эксперт крупнее обычного, но нарисован таким же"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B-BF16/blob/main/config.json"
+   ],
+   "note": "Флагман линии Nemotron 3: гибрид Mamba-2, LatentMoE и редких слоёв внимания. 512 экспертов, на токен 22. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено."
+  },
+  {
+   "id": "nemotron-3.5-super-vl",
+   "name": "Nemotron 3.5 Super VL",
+   "provider": "NVIDIA",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-12",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 120000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+    "note": "120 млрд по карточке (124 млрд в safetensors с энкодером)"
+   },
+   "active_params": {
+    "value": 12000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+    "note": "12 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5505024,
+      "experts": 512,
+      "active": 22,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибрид Mamba-2 и трансформера: слои Mamba и внимания не имеют FFN — их этаж показывает параметры самого слоя и светится целиком; эксперты LatentMoE работают в сжатом пространстве, общий эксперт крупнее обычного, но нарисован таким же"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16/blob/main/config.json"
+   ],
+   "note": "Super с глазами: текст, картинки и видео; документы — как изображения страниц. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер C-RADIO",
+     "value": 629145600,
+     "status": "estimate",
+     "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+     "note": "ViT 32 слоя × 1280 по config.json",
+     "confidence": "high"
+    }
+   ],
+   "retrain": {
+    "value": "Nemotron 3 Super",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Super-VL-120B-A12B-BF16",
+    "note": "основа взята из Nemotron 3 Super Base; добавлены зрение, продолжение предобучения и дообучение"
+   }
+  },
+  {
+   "id": "nemotron-3.5-bolt-74b",
+   "name": "Nemotron 3.5 Bolt 74B",
+   "provider": "NVIDIA",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-09",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 74000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+    "note": "74 млрд по карточке"
+   },
+   "active_params": {
+    "value": 9000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+    "note": "9 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 3145728,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 496,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 304,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 240,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4194304,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 4718592,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 35651584,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 496,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 432,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 496,
+      "active": 9,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 109576192,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 5242880,
+      "experts": 368,
+      "active": 9,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибрид Mamba-2 и трансформера: слои Mamba и внимания не имеют FFN — их этаж показывает параметры самого слоя и светится целиком; эксперты LatentMoE работают в сжатом пространстве, общий эксперт крупнее обычного, но нарисован таким же"
+   },
+   "context": {
+    "value": 262144,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image",
+     "video"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16/blob/main/config.json"
+   ],
+   "note": "Ужатый Super VL под одну видеокарту на 24 ГБ: поиск архитектуры (Puzzle) сам выбрал число и ширину экспертов для каждого слоя — поэтому этажи разной площади; на токен 9 экспертов вместо 22. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер C-RADIO",
+     "value": 629145600,
+     "status": "estimate",
+     "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+     "note": "ViT 32 слоя × 1280 по config.json",
+     "confidence": "high"
+    }
+   ],
+   "retrain": {
+    "value": "Nemotron 3.5 Super VL",
+    "id": "nemotron-3.5-super-vl",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-BF16",
+    "note": "ужата поиском архитектуры и восстановлена дообучением, поэтому здание меньше"
+   }
+  },
+  {
+   "id": "nemotron-3.5-lightning",
+   "name": "Nemotron 3.5 Lightning 30B",
+   "provider": "NVIDIA",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-08-01",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 30000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "note": "30 млрд по карточке (31,6 млрд в safetensors)"
+   },
+   "active_params": {
+    "value": 3000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "note": "3 млрд по карточке"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибрид Mamba-2 и трансформера: слои Mamba и внимания не имеют FFN — их этаж показывает параметры самого слоя и светится целиком, общий эксперт крупнее обычного, но нарисован таким же"
+   },
+   "context": {
+    "value": 1048576,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "note": "до 1M; на одной H100 — 256K"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-BF16/blob/main/config.json"
+   ],
+   "note": "Быстрая модель линии (класс Flash): 128 экспертов, на токен 6, без сжатия экспертов. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено."
+  },
+  {
+   "id": "nemotron-3.5-bolt-e4b",
+   "name": "Nemotron 3.5 Bolt E4B",
+   "provider": "NVIDIA",
+   "kind": "llm",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-05",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 8000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "note": "8 млрд по карточке"
+   },
+   "active_params": {
+    "value": 4000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "note": "4 млрд «эффективных» — без эмбеддингов по слоям"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 42,
+      "kind": "dense",
+      "ffn_per_expert": 78643200
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; половина слоёв берёт ключи и значения внимания у соседей (KV sharing)"
+   },
+   "context": {
+    "value": 65536,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "note": "вход и ответ — до 64K каждый"
+   },
+   "input": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16/blob/main/config.json"
+   ],
+   "note": "Маленькая модель для ноутбука и телефона (4 ГБ в сжатом виде), дообучение NVIDIA на основе Gemma 4 E4B. Половина весов — словари эмбеддингов для каждого слоя: они лежат в памяти, но не считаются. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "embedding",
+     "name": "склад эмбеддингов по слоям (PLE)",
+     "value": 2818572288,
+     "status": "known",
+     "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16/blob/main/config.json",
+     "note": "словарь 262 144 × 256 × 42 слоя по config.json"
+    }
+   ],
+   "retrain": {
+    "value": "Gemma 4 E4B",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Bolt-E4B-BF16",
+    "note": "дообучение NVIDIA поверх модели Google"
+   }
+  },
+  {
+   "id": "nemotron-3.5-transcribe",
+   "name": "Nemotron 3.5 Transcribe",
+   "provider": "NVIDIA",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-07",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 34000000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "note": "34 млрд по карточке вместе с аудиоэнкодером"
+   },
+   "active_params": {
+    "value": 4300000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "note": "4,3 млрд: основа 3,5 млрд + энкодер ~0,8 млрд"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 32,
+      "kind": "dense",
+      "ffn_per_expert": 13107200,
+      "part": "encoder",
+      "label": "аудиоэнкодер"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 23396352,
+      "mixer": "attention",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "dense",
+      "ffn_per_expert": 38707200,
+      "mixer": "mamba",
+      "part": "decoder"
+     },
+     {
+      "count": 1,
+      "kind": "moe",
+      "ffn_per_expert": 9977856,
+      "experts": 128,
+      "active": 6,
+      "shared": 1,
+      "part": "decoder"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; гибрид Mamba-2 и трансформера: слои Mamba и внимания не имеют FFN — их этаж показывает параметры самого слоя и светится целиком; эксперты LatentMoE работают в сжатом пространстве, общий эксперт крупнее обычного, но нарисован таким же; энкодер — трансформер 32 слоя × 1280"
+   },
+   "context": {
+    "value": 65536,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "note": "65 536 токенов, запись до 1 часа"
+   },
+   "input": {
+    "value": [
+     "audio",
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B/blob/main/config.json"
+   ],
+   "note": "Распознавание речи на 40 языках: записи до часа, разметка говорящих, перевод. Внутри — аудиоэнкодер и языковая основа класса Lightning (Mamba + MoE). лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "retrain": {
+    "value": "Nemotron 3.5 Lightning 30B",
+    "id": "nemotron-3.5-lightning",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+    "note": "языковая основа — Lightning; добавлен аудиоэнкодер, обучена на речи"
+   }
+  },
+  {
+   "id": "nemotron-3.5-asr-streaming",
+   "name": "Nemotron 3.5 ASR Streaming 0.6B",
+   "provider": "NVIDIA",
+   "kind": "speech",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-05-15",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 638000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "note": "638 млн в safetensors"
+   },
+   "active_params": {
+    "value": 638000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "note": "плотная модель"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 24,
+      "kind": "dense",
+      "ffn_per_expert": 16777216,
+      "part": "encoder",
+      "label": "аудиоэнкодер (FastConformer)"
+     },
+     {
+      "count": 2,
+      "kind": "dense",
+      "ffn_per_expert": 3276800,
+      "part": "decoder",
+      "label": "предсказатель RNN-T (LSTM)"
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; у слоя Conformer два полу-FFN — посчитаны вместе; у LSTM вместо FFN — гейты"
+   },
+   "context": {
+    "value": null,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "note": "потоковый режим, окно не ограничено"
+   },
+   "input": {
+    "value": [
+     "audio"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "https://huggingface.co/nvidia/nemotron-3.5-asr-streaming-0.6b/blob/main/config.json"
+   ],
+   "note": "Потоковое распознавание речи с малой задержкой: текст появляется по ходу речи. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено."
+  },
+  {
+   "id": "nemotron-3.5-embed-8b",
+   "name": "Nemotron 3.5 Embed 8B",
+   "provider": "NVIDIA",
+   "kind": "utility",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-07",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 8380000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16",
+    "note": "8,38 млрд в safetensors"
+   },
+   "active_params": {
+    "value": 8380000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16",
+    "note": "плотная модель"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 34,
+      "kind": "dense",
+      "ffn_per_expert": 176160768
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта; внимание двустороннее: модель читает текст целиком, а не слева направо"
+   },
+   "context": {
+    "value": 32768,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16"
+   },
+   "output": {
+    "value": [
+     "vector"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16",
+    "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16/blob/main/config.json"
+   ],
+   "note": "Эмбеддинги для поиска: превращает вопрос, текст или картинку страницы документа в вектор. Основа — Ministral 3 8B. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер Pixtral",
+     "value": 301989888,
+     "status": "estimate",
+     "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16/blob/main/config.json",
+     "note": "24 слоя × 1024 по config.json",
+     "confidence": "high"
+    }
+   ],
+   "retrain": {
+    "value": "Ministral 3 8B",
+    "id": "ministral-3-8b",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Embed-8B-BF16",
+    "note": "дообучена под эмбеддинги; другая голова и другая задача"
+   }
+  },
+  {
+   "id": "nemotron-3.5-rerank-8b",
+   "name": "Nemotron 3.5 Rerank 8B",
+   "provider": "NVIDIA",
+   "kind": "utility",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-10-15",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 8380000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+    "note": "8,38 млрд в safetensors"
+   },
+   "active_params": {
+    "value": 8380000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+    "note": "плотная модель"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 34,
+      "kind": "dense",
+      "ffn_per_expert": 176160768
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 32768,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16"
+   },
+   "output": {
+    "value": [
+     "score"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+    "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/blob/main/config.json"
+   ],
+   "note": "Переранжирование: получает вопрос и документ (текст или картинку) и выдаёт одно число — насколько документ подходит. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер Pixtral",
+     "value": 301989888,
+     "status": "estimate",
+     "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16/blob/main/config.json",
+     "note": "24 слоя × 1024 по config.json",
+     "confidence": "high"
+    }
+   ],
+   "retrain": {
+    "value": "Ministral 3 8B",
+    "id": "ministral-3-8b",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Rerank-8B-BF16",
+    "note": "дообучена под ранжирование; выдаёт оценку вместо текста"
+   }
+  },
+  {
+   "id": "nemotron-3.5-content-safety",
+   "name": "Nemotron 3.5 Content Safety",
+   "provider": "NVIDIA",
+   "kind": "utility",
+   "open_weights": true,
+   "license": "other",
+   "released": {
+    "value": "2026-05-22",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety",
+    "note": "дата публикации весов на Hugging Face"
+   },
+   "total_params": {
+    "value": 4300000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety",
+    "note": "4,3 млрд в safetensors"
+   },
+   "active_params": {
+    "value": 4300000000.0,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety",
+    "note": "плотная модель"
+   },
+   "layers": {
+    "value": [
+     {
+      "count": 34,
+      "kind": "dense",
+      "ffn_per_expert": 78643200
+     }
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety/blob/main/config.json",
+    "note": "этажи: слои по порядку снизу вверх; ffn = параметры FFN одного эксперта"
+   },
+   "context": {
+    "value": 131072,
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety"
+   },
+   "input": {
+    "value": [
+     "text",
+     "image"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety"
+   },
+   "output": {
+    "value": [
+     "text"
+    ],
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety"
+   },
+   "sources": [
+    "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety",
+    "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety/blob/main/config.json"
+   ],
+   "note": "Фильтр безопасности: проверяет запрос и ответ (с картинками) и называет нарушенные категории. Основа — Gemma 3 4B. лицензия NVIDIA Open Model (openmdw-1.1): коммерческое использование разрешено.",
+   "annexes": [
+    {
+     "kind": "vision",
+     "name": "визуальный энкодер SigLIP",
+     "value": 411070464,
+     "status": "estimate",
+     "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety/blob/main/config.json",
+     "note": "27 слоёв × 1152 по config.json",
+     "confidence": "high"
+    }
+   ],
+   "retrain": {
+    "value": "Gemma 3 4B",
+    "status": "known",
+    "source": "https://huggingface.co/nvidia/Nemotron-3.5-Content-Safety",
+    "note": "дообучение (LoRA) на данных о безопасности"
+   }
+  }
+ ]
+}

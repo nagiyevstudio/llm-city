@@ -1,0 +1,26 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "park",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "tools/park_server.py",
+        "8080"
+      ],
+      "port": 8080
+    },
+    {
+      "name": "park-shoot",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "tools/park_server.py",
+        "8081",
+        "--out",
+        "D:/DRIVE/CASES/AI Studio/projects/ai-blog/reels/reel-02-model-park/media/b-roll"
+      ],
+      "port": 8081,
+      "url": "http://localhost:8081"
+    }
+  ]
+}

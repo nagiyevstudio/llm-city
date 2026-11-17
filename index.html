@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Model Park: AI models as a city</title>
+  <meta name="description" content="An interactive 3D city of AI models at one scale. Each building is built from the model's real architecture: floors are layers, floor area is parameters, lit cells are the experts at work.">
+  <meta property="og:title" content="Model Park: AI models as a city">
+  <meta property="og:description" content="An interactive 3D city of AI models at one scale, built from their real architecture.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://llm.nagiyev.com/">
+  <meta name="theme-color" content="#0b1018">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Model Park">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="src/styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="scene"></div>
+
+  <header class="topbar">
+    <div class="brand">Model Park</div>
+    <div class="topbar-actions">
+      <button id="btn-filters" class="btn" aria-expanded="false">Filters</button>
+      <button id="btn-legend" class="btn" aria-expanded="false">Legend</button>
+      <label class="switch" title="Fades estimated models and shows only the order of magnitude in their cards">
+        <input type="checkbox" id="fog-toggle"> <span class="long">Fade estimates</span><span class="short">Fade</span>
+      </label>
+      <button id="btn-theme" class="btn" aria-label="Change theme"><span class="long">Light</span><span class="short">☀</span></button>
+      <button id="btn-reset" class="btn" aria-label="Show the whole park"><span class="long">Whole park</span><span class="short">⤢</span></button>
+    </div>
+  </header>
+
+  <section id="filters" class="panel left" hidden>
+    <input id="search" type="search" placeholder="Search models" autocomplete="off">
+    <div class="group">
+      <div class="group-title">Provider</div>
+      <div id="f-provider" class="chips"></div>
+    </div>
+    <div class="group">
+      <div class="group-title">Model type</div>
+      <div id="f-kind" class="chips"></div>
+    </div>
+    <div class="group">
+      <div class="group-title">Accepts as input</div>
+      <div id="f-input" class="chips"></div>
+    </div>
+    <div class="group">
+      <div class="group-title">Weights</div>
+      <div id="f-open" class="chips"></div>
+    </div>
+    <div class="group">
+      <div class="group-title">Released</div>
+      <div id="f-fresh" class="chips"></div>
+    </div>
+    <button id="f-reset" class="btn small">Reset filters</button>
+  </section>
+
+  <section id="legend" class="panel left" hidden>
+    <dl class="legend-list">
+      <dt>Floor</dt><dd>one layer of the model</dd>
+      <dt>Floor area</dt><dd>parameters of the layer: height × area ≈ model size</dd>
+      <dt>Floor cells</dt><dd>experts; a dense model has one cell per floor</dd>
+      <dt><span class="swatch lit"></span>Lit cells</dt><dd>active experts; a dense model is fully lit</dd>
+      <dt>Narrow floor</dt><dd>a dense layer inside an MoE model, seen through the glass. In NVIDIA hybrids it is a Mamba or attention layer: it has no FFN, so the area shows the parameters of the layer itself</dd>
+      <dt><span class="swatch retrain"></span>Green edges</dt><dd>post-trained from another model: nearly the same building, different weights. The card says from which one</dd>
+      <dt>Annexes</dt><dd>parts outside the layers: embeddings, text encoder, VAE, codec, at the same volume scale</dd>
+      <dt><span class="swatch enc"></span>Blue cells</dt><dd>encoder (reads the input); yellow cells are the decoder</dd>
+      <dt><span class="loop-mark">↻</span> Core × N</dt><dd>recurrent depth: the model passes these floors several times in a row for each token</dd>
+      <dt><span class="rec">●</span> Dot on the roof</dt><dd>realtime: the model works in streaming mode</dd>
+      <dt>Bottom band</dt><dd>input: thickness is context, colour is formats</dd>
+      <dt>Top band</dt><dd>output: thickness is context, colour is formats</dd>
+      <dt>Dashed lines</dt><dd>an estimate, not published data; a closed model is a translucent dashed silhouette</dd>
+    </dl>
+    <div class="group-title">Controls</div>
+    <dl class="legend-list">
+      <dt>Double click</dt><dd>on a building to zoom in; on the ground to move the rotation centre there</dd>
+      <dt>Right button</dt><dd>pan the map with its centre (two fingers on a phone)</dd>
+    </dl>
+    <div class="group-title">Base shape is the model type</div>
+    <div class="legend-kinds">
+      <span>▢ language</span><span>◯ speech & audio</span><span>⬡ image</span><span>⯃ video</span><span>⬠ forecasting</span><span>△ utility</span>
+    </div>
+    <div class="group-title">Formats</div>
+    <div id="legend-formats" class="legend-formats"></div>
+    <div class="group-title">Band thickness is context</div>
+    <div id="legend-context" class="legend-context"></div>
+  </section>
+
+  <aside id="card" class="card" hidden>
+    <button id="card-close" class="card-close" aria-label="Close">×</button>
+    <div id="card-body"></div>
+  </aside>
+
+  <section id="anim-hud" class="anim-hud" hidden>
+    <div class="anim-head">
+      <strong id="anim-title"></strong>
+      <button id="anim-stop" class="card-close" aria-label="Stop">×</button>
+    </div>
+    <div id="anim-phase" class="anim-phase"></div>
+    <div id="anim-count" class="anim-count"></div>
+    <div id="anim-text" class="anim-text"></div>
+    <div class="anim-controls">
+      <button id="anim-pause" class="btn small">Pause</button>
+      <button id="anim-step" class="btn small" disabled>Step</button>
+      <div id="anim-speed" class="chips">
+        <button class="chip" data-speed="0.25" aria-pressed="false">¼×</button>
+        <button class="chip" data-speed="0.5" aria-pressed="false">½×</button>
+        <button class="chip" data-speed="1" aria-pressed="true">1×</button>
+        <button class="chip" data-speed="2" aria-pressed="false">2×</button>
+      </div>
+      <label class="anim-follow"><input type="checkbox" id="anim-follow" checked> camera follows the pulse</label>
+    </div>
+    <div class="anim-note">Which experts light up is random; the number of floors, experts and working parameters is real.</div>
+  </section>
+
+  <section id="intro" class="intro" hidden>
+    <h1>Model Park</h1>
+    <p>AI models as a city, all at one scale. Each company is a block, each model is a building built from its real architecture: floors are layers, floor area is parameters, lit cells are the experts working on a token.</p>
+    <p>Solid buildings come from published configs. Dashed silhouettes are closed models: their size is not public, so it is our estimate.</p>
+    <p class="intro-hint">Drag to rotate, scroll or pinch to zoom, click or tap a building for its card.</p>
+    <button id="intro-close" class="btn">Explore the city</button>
+    <p class="intro-by">Made by <a href="https://nagiyev.com" target="_blank" rel="noopener">Nagiyev Studio</a></p>
+  </section>
+
+  <div id="status" class="status">Loading…</div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Парк Моделей — 3D Прототип Класса C4 (Флагман Фронтир)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background-color: #05080f; color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; }
+    canvas { display: block; width: 100vw; height: 100vh; cursor: grab; }
+    canvas:active { cursor: grabbing; }
+    .glass-panel { background: rgba(13, 20, 36, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .custom-scroll::-webkit-scrollbar { width: 4px; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  </style>
+</head>
+<body class="relative">
+
+  <!-- 3D Полноэкранный холст -->
+  <canvas id="view3d"></canvas>
+
+  <!-- Верхняя плашка управления и пресетов -->
+  <header class="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-3 pointer-events-none z-20">
+    <div class="glass-panel rounded-xl px-4 py-2.5 shadow-2xl pointer-events-auto flex items-center gap-3">
+      <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-sm shadow-cyan-400"></div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 bg-amber-950/40 border border-amber-800/60 px-1.5 py-0.5 rounded">C4</span>
+          <h1 id="title-name" class="text-sm font-bold text-white tracking-tight">DeepSeek-V4 (Открытый MoE)</h1>
+        </div>
+        <div id="sub-status" class="text-[11px] font-mono text-cyan-300">Стеклянный корпус · Внутренние кубы активных экспертов</div>
+      </div>
+    </div>
+
+    <!-- Быстрые кнопки пресетов + Полноэкранный режим -->
+    <div class="glass-panel rounded-xl p-1.5 shadow-2xl pointer-events-auto flex items-center gap-1.5">
+      <span class="text-[11px] font-mono text-slate-400 px-2">Пресеты:</span>
+      <button onclick="setPreset('deepseek')" class="btn-preset px-3 py-1.5 text-xs rounded-lg bg-cyan-950/60 text-cyan-300 border border-cyan-700/60 hover:bg-cyan-900 transition font-medium">DeepSeek-V4 (MoE)</button>
+      <button onclick="setPreset('llama')" class="btn-preset px-3 py-1.5 text-xs rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">Llama 4 (Dense)</button>
+      <button onclick="setPreset('astra')" class="btn-preset px-3 py-1.5 text-xs rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">GPT-6 Astra (Закрытый)</button>
+      <button onclick="setPreset('argon')" class="btn-preset px-3 py-1.5 text-xs rounded-lg bg-slate-800/80 text-slate-300 border border-slate-700 hover:bg-slate-700 transition">Gemini 4 Argon</button>
+      
+      <div class="w-[1px] h-5 bg-slate-700 mx-1"></div>
+      
+      <button onclick="toggleFullscreen()" class="px-3 py-1.5 text-xs rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/50 transition flex items-center gap-1.5 font-medium" title="Во весь экран (F11)">
+        <span id="fs-icon">⛶</span>
+        <span>На весь экран</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Боковая выдвижная панель параметров -->
+  <aside id="controls-panel" class="absolute top-20 right-4 w-84 max-w-[calc(100vw-2rem)] glass-panel rounded-2xl p-4 shadow-2xl z-20 max-h-[calc(100vh-6.5rem)] overflow-y-auto custom-scroll space-y-4 transition-all">
+    
+    <div class="flex items-center justify-between border-b border-slate-700/70 pb-2">
+      <span class="text-xs font-mono font-bold uppercase tracking-wider text-slate-300">Параметры & Capabilities</span>
+      <button onclick="resetCamera()" class="text-xs text-cyan-400 hover:text-cyan-300 underline font-mono">Сброс камеры</button>
+    </div>
+
+    <!-- 1. Открытость весов -->
+    <div class="space-y-1.5">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-slate-300 font-medium">Статус весов:</span>
+        <span id="val-openness" class="font-mono text-cyan-300 font-bold">Открытые</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5">
+        <button onclick="setOpenness(true)" id="btn-open" class="text-xs py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 font-medium">Открытые (Стекло)</button>
+        <button onclick="setOpenness(false)" id="btn-closed" class="text-xs py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700">Закрытые (Монолит)</button>
+      </div>
+      <p class="text-[11px] text-slate-400 leading-relaxed">
+        Открытые: прозрачный корпус, внутри парят кубы активных параметров.<br>
+        Закрытые: плотный черный монолит.
+      </p>
+    </div>
+
+    <!-- 2. Dense vs MoE -->
+    <div class="space-y-1.5 border-t border-slate-700/60 pt-3">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-slate-300 font-medium">Внутренние кубы параметров:</span>
+        <span id="val-dense" class="font-mono text-slate-300">MoE (~5% кубов)</span>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5">
+        <button onclick="setMoE(false)" id="btn-dense" class="text-xs py-1.5 rounded-lg bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700">Dense (Массив)</button>
+        <button onclick="setMoE(true)" id="btn-moe" class="text-xs py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 font-medium">MoE (Эксперты)</button>
+      </div>
+    </div>
+
+    <!-- 3. Reasoning Effort -->
+    <div class="space-y-1.5 border-t border-slate-700/60 pt-3">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-slate-300 font-medium flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          Reasoning Effort (Ярусы):
+        </span>
+        <span id="val-reasoning" class="font-mono text-amber-300 font-bold">2 (Med)</span>
+      </div>
+      <div class="grid grid-cols-4 gap-1">
+        <button onclick="setReasoning(0)" class="btn-reason text-xs py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700">0</button>
+        <button onclick="setReasoning(1)" class="btn-reason text-xs py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700">1 (Low)</button>
+        <button onclick="setReasoning(2)" class="btn-reason text-xs py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/50">2 (Med)</button>
+        <button onclick="setReasoning(3)" class="btn-reason text-xs py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700">3 (High)</button>
+      </div>
+      <p class="text-[11px] text-slate-400">Ступени зиккурата на крыше отражают глубину шагов рассуждения.</p>
+    </div>
+
+    <!-- 4. Контекстное окно -->
+    <div class="space-y-1.5 border-t border-slate-700/60 pt-3">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-slate-300 font-medium">Контекстный шпиль:</span>
+        <span id="val-context" class="font-mono text-cyan-300 font-bold">128K</span>
+      </div>
+      <div class="grid grid-cols-3 gap-1">
+        <button onclick="setContext('128k')" class="btn-ctx text-xs py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/50">128K</button>
+        <button onclick="setContext('1m')" class="btn-ctx text-xs py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700">1M–2M</button>
+        <button onclick="setContext('10m')" class="btn-ctx text-xs py-1 rounded bg-slate-800 border border-slate-700 hover:bg-slate-700">10M</button>
+      </div>
+    </div>
+
+    <!-- 5. Capabilities -->
+    <div class="space-y-2 border-t border-slate-700/60 pt-3">
+      <span class="text-xs font-medium text-slate-300 block">Маркеры возможностей:</span>
+      
+      <label class="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-900/60 border border-slate-800 cursor-pointer hover:bg-slate-900">
+        <span class="flex items-center gap-2">
+          <span class="font-mono font-bold text-emerald-400">{ }</span>
+          <span>Structured Output (JSON)</span>
+        </span>
+        <input type="checkbox" id="chk-json" checked onchange="updateToggles()" class="rounded bg-slate-950 border-slate-700 text-emerald-500 focus:ring-0">
+      </label>
+
+      <label class="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-900/60 border border-slate-800 cursor-pointer hover:bg-slate-900">
+        <span class="flex items-center gap-2">
+          <span class="text-indigo-400 text-sm">☵</span>
+          <span>Tool Use (Стыковочные пирсы)</span>
+        </span>
+        <input type="checkbox" id="chk-tools" checked onchange="updateToggles()" class="rounded bg-slate-950 border-slate-700 text-indigo-500 focus:ring-0">
+      </label>
+
+      <label class="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-900/60 border border-slate-800 cursor-pointer hover:bg-slate-900">
+        <span class="flex items-center gap-2">
+          <span class="text-sky-400 text-sm">⚡</span>
+          <span>Prompt Caching (Энерго-шина)</span>
+        </span>
+        <input type="checkbox" id="chk-cache" checked onchange="updateToggles()" class="rounded bg-slate-950 border-slate-700 text-sky-500 focus:ring-0">
+      </label>
+
+      <label class="flex items-center justify-between text-xs p-2 rounded-lg bg-purple-950/20 border border-purple-900/40 cursor-pointer hover:bg-purple-950/40">
+        <span class="flex items-center gap-2 text-purple-300">
+          <span class="text-purple-400 text-sm">░</span>
+          <span>Режим «Туман» (Оценка)</span>
+        </span>
+        <input type="checkbox" id="chk-fog" onchange="updateToggles()" class="rounded bg-slate-950 border-purple-700 text-purple-500 focus:ring-0">
+      </label>
+    </div>
+
+  </aside>
+
+  <!-- Нижняя панель подсказок управления -->
+  <footer class="absolute bottom-4 left-4 glass-panel rounded-xl px-4 py-2 text-xs text-slate-400 pointer-events-none z-10 flex items-center gap-4">
+    <div class="flex items-center gap-1.5">
+      <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] font-mono text-slate-300">ЛКМ + Драг</kbd>
+      <span>Вращение</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] font-mono text-slate-300">Колесико</kbd>
+      <span>Масштаб</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-[10px] font-mono text-slate-300">Тач</kbd>
+      <span>Жесты на телефоне/планшете</span>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('view3d');
+    const ctx = canvas.getContext('2d');
+
+    const state = {
+      name: 'DeepSeek-V4 (Открытый MoE)',
+      reasoningTiers: 2,
+      context: '128k',
+      isMoE: true,
+      isOpen: true,
+      hasJson: true,
+      hasTools: true,
+      hasCache: true,
+      isFog: false,
+      angle: 0.78,
+      pitch: 0.52,
+      zoom: 1.15,
+      isDragging: false,
+      lastMouseX: 0,
+      lastMouseY: 0
+    };
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      draw();
+    }
+    window.addEventListener('resize', resize);
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+        document.getElementById('fs-icon').innerText = '✕';
+      } else {
+        document.exitFullscreen().catch(() => {});
+        document.getElementById('fs-icon').innerText = '⛶';
+      }
+    }
+
+    function project(x, y, z, originX, originY) {
+      const cosA = Math.cos(state.angle);
+      const sinA = Math.sin(state.angle);
+      const rotX = x * cosA - z * sinA;
+      const rotZ = x * sinA + z * cosA;
+
+      const cosP = Math.cos(state.pitch);
+      const sinP = Math.sin(state.pitch);
+      const projY = -y * cosP + rotZ * sinP;
+      const depth = rotZ * cosP + y * sinP;
+
+      const scale = 1.45 * state.zoom;
+      return {
+        x: originX + rotX * scale,
+        y: originY + projY * scale,
+        depth: depth
+      };
+    }
+
+    function drawPolygon(pts, originX, originY, fillColor, strokeColor, lineWidth = 1, isDashed = false) {
+      const proj = pts.map(p => project(p[0], p[1], p[2], originX, originY));
+      ctx.beginPath();
+      ctx.moveTo(proj[0].x, proj[0].y);
+      for (let i = 1; i < proj.length; i++) {
+        ctx.lineTo(proj[i].x, proj[i].y);
+      }
+      ctx.closePath();
+
+      if (fillColor) {
+        ctx.fillStyle = fillColor;
+        ctx.fill();
+      }
+
+      if (strokeColor) {
+        ctx.strokeStyle = strokeColor;
+        ctx.lineWidth = lineWidth;
+        if (isDashed || state.isFog) {
+          ctx.setLineDash([4, 4]);
+        } else {
+          ctx.setLineDash([]);
+        }
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    function drawVoxel(x, y, z, size, originX, originY, fillColor, edgeColor) {
+      const s = size / 2;
+      drawPolygon([[x-s, y+s, z-s], [x+s, y+s, z-s], [x+s, y+s, z+s], [x-s, y+s, z+s]], originX, originY, fillColor, edgeColor, 1);
+      drawPolygon([[x-s, y-s, z+s], [x+s, y-s, z+s], [x+s, y+s, z+s], [x-s, y+s, z+s]], originX, originY, fillColor, edgeColor, 1);
+      drawPolygon([[x+s, y-s, z-s], [x+s, y-s, z+s], [x+s, y+s, z+s], [x+s, y+s, z-s]], originX, originY, fillColor, edgeColor, 1);
+    }
+
+    function draw() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const cx = w / 2;
+      const cy = h / 2 + 100;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Фоновая сетка земли
+      ctx.strokeStyle = '#101726';
+      ctx.lineWidth = 1;
+      const gridSize = 220;
+      for (let i = -7; i <= 7; i++) {
+        const p1 = project(i * 32, 0, -gridSize, cx, cy);
+        const p2 = project(i * 32, 0, gridSize, cx, cy);
+        ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+        const p3 = project(-gridSize, 0, i * 32, cx, cy);
+        const p4 = project(gridSize, 0, i * 32, cx, cy);
+        ctx.beginPath(); ctx.moveTo(p3.x, p3.y); ctx.lineTo(p4.x, p4.y); ctx.stroke();
+      }
+
+      const tw = 52;
+      const th = 240;
+      const by = 0;
+
+      // 1. Задняя часть прозрачного корпуса
+      if (state.isOpen) {
+        drawPolygon([[-tw, by, -tw], [tw, by, -tw], [tw, by + th, -tw], [-tw, by + th, -tw]], cx, cy, 'rgba(8, 24, 44, 0.45)', 'rgba(56, 189, 248, 0.3)', 1, true);
+        drawPolygon([[-tw, by, -tw], [-tw, by, tw], [-tw, by + th, tw], [-tw, by + th, -tw]], cx, cy, 'rgba(6, 18, 34, 0.45)', 'rgba(56, 189, 248, 0.3)', 1, true);
+      }
+
+      // 2. Внутренние кубы активных параметров
+      if (state.isOpen) {
+        const voxelSize = 12;
+        const spacing = 20;
+
+        if (state.isMoE) {
+          // MoE: парящие эксперты
+          const experts = [
+            { x: -16, y: 40, z: -4, col: '#38bdf8', edge: '#7dd3fc' },
+            { x: 16, y: 65, z: -12, col: '#38bdf8', edge: '#7dd3fc' },
+            { x: 0, y: 105, z: 14, col: '#38bdf8', edge: '#7dd3fc' },
+            { x: -14, y: 145, z: -8, col: '#38bdf8', edge: '#7dd3fc' },
+            { x: 14, y: 175, z: 8, col: '#38bdf8', edge: '#7dd3fc' },
+            { x: 0, y: 210, z: 0, col: '#0284c7', edge: '#38bdf8' }
+          ];
+
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(56, 189, 248, 0.25)';
+          ctx.lineWidth = 1;
+          for (let i = 0; i < experts.length - 1; i++) {
+            const pA = project(experts[i].x, experts[i].y, experts[i].z, cx, cy);
+            const pB = project(experts[i+1].x, experts[i+1].y, experts[i+1].z, cx, cy);
+            ctx.moveTo(pA.x, pA.y);
+            ctx.lineTo(pB.x, pB.y);
+          }
+          ctx.stroke();
+
+          experts.forEach(e => {
+            drawVoxel(e.x, e.y, e.z, voxelSize + 2, cx, cy, e.col, e.edge);
+          });
+        } else {
+          // Dense: плотный кристаллический кубический массив
+          for (let dy = 32; dy <= th - 32; dy += spacing) {
+            for (let dx = -20; dx <= 20; dx += spacing) {
+              for (let dz = -20; dz <= 20; dz += spacing) {
+                drawVoxel(dx, dy, dz, voxelSize - 2, cx, cy, 'rgba(56, 189, 248, 0.75)', '#bae6fd');
+              }
+            }
+          }
+        }
+      }
+
+      // 3. Передние грани здания
+      if (state.isOpen) {
+        const glassFillFront = state.isFog ? 'rgba(147, 51, 234, 0.15)' : 'rgba(14, 116, 144, 0.2)';
+        const glassFillSide = state.isFog ? 'rgba(126, 34, 206, 0.15)' : 'rgba(8, 47, 73, 0.25)';
+        const glassFillTop = state.isFog ? 'rgba(168, 85, 247, 0.2)' : 'rgba(56, 189, 248, 0.25)';
+        const glassEdge = state.isFog ? '#c084fc' : '#38bdf8';
+
+        drawPolygon([[-tw, by, tw], [tw, by, tw], [tw, by + th, tw], [-tw, by + th, tw]], cx, cy, glassFillFront, glassEdge, 1.5);
+        drawPolygon([[tw, by, -tw], [tw, by, tw], [tw, by + th, tw], [tw, by + th, -tw]], cx, cy, glassFillSide, glassEdge, 1.5);
+        drawPolygon([[-tw, by + th, -tw], [tw, by + th, -tw], [tw, by + th, tw], [-tw, by + th, tw]], cx, cy, glassFillTop, glassEdge, 1.5);
+      } else {
+        // Закрытый монолит
+        const solidFront = state.isFog ? 'rgba(30, 41, 59, 0.5)' : '#1e293b';
+        const solidSide = state.isFog ? 'rgba(15, 23, 42, 0.5)' : '#0f172a';
+        const solidTop = state.isFog ? 'rgba(51, 65, 85, 0.5)' : '#334155';
+        const solidEdge = state.isFog ? '#a855f7' : '#94a3b8';
+
+        drawPolygon([[-tw, by, tw], [tw, by, tw], [tw, by + th, tw], [-tw, by + th, tw]], cx, cy, solidFront, solidEdge, 1.5);
+        drawPolygon([[tw, by, -tw], [tw, by, tw], [tw, by + th, tw], [tw, by + th, -tw]], cx, cy, solidSide, solidEdge, 1.5);
+        drawPolygon([[-tw, by + th, -tw], [tw, by + th, -tw], [tw, by + th, tw], [-tw, by + th, tw]], cx, cy, solidTop, solidEdge, 1.5);
+
+        // Окна на закрытом
+        for (let r = 0; r < 12; r++) {
+          for (let c = 0; c < 5; c++) {
+            const wx = -tw + 8 + c * 18;
+            const wy = by + 20 + r * 18;
+            drawPolygon([[wx, wy, tw + 0.5], [wx + 7, wy, tw + 0.5], [wx + 7, wy + 9, tw + 0.5], [wx, wy + 9, tw + 0.5]], cx, cy, '#334155', '#475569', 0.5);
+          }
+        }
+      }
+
+      // 4. Prompt Caching
+      if (state.hasCache) {
+        const cp1 = project(tw, by + 15, tw, cx, cy);
+        const cp2 = project(tw, by + th - 15, tw, cx, cy);
+        ctx.beginPath();
+        ctx.moveTo(cp1.x, cp1.y);
+        ctx.lineTo(cp2.x, cp2.y);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+      }
+
+      // 5. Structured Output
+      if (state.hasJson) {
+        const jx = -tw + 8;
+        const jy = by + th - 38;
+        drawPolygon([[jx, jy, tw + 1.5], [jx + 26, jy, tw + 1.5], [jx + 26, jy + 24, tw + 1.5], [jx, jy + 24, tw + 1.5]], cx, cy, '#064e3b', '#10b981', 1.5);
+        const pCenter = project(jx + 13, jy + 12, tw + 2.5, cx, cy);
+        ctx.fillStyle = '#6ee7b7';
+        ctx.font = 'bold 13px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('{ }', pCenter.x, pCenter.y);
+      }
+
+      // 6. Tool Use Dock
+      if (state.hasTools) {
+        const dockY = by + 120;
+        const dockW = 18;
+        const dockH = 14;
+        drawPolygon([[-tw - dockW, dockY, 18], [-tw, dockY, 18], [-tw, dockY + dockH, 18], [-tw - dockW, dockY + dockH, 18]], cx, cy, '#312e81', '#6366f1', 1.5);
+        drawPolygon([[tw, dockY, 18], [tw + dockW, dockY, 18], [tw + dockW, dockY + dockH, 18], [tw, dockY + dockH, 18]], cx, cy, '#312e81', '#6366f1', 1.5);
+      }
+
+      // 7. Порталы цоколя
+      const portalW = 13;
+      const portalH = 18;
+      const portals = [
+        { col: '#94a3b8', x: -40 },
+        { col: '#06b6d4', x: -20 },
+        { col: '#f59e0b', x: 0 },
+        { col: '#10b981', x: 20 }
+      ];
+      portals.forEach(p => {
+        drawPolygon([[p.x, by, tw + 0.8], [p.x + portalW, by, tw + 0.8], [p.x + portalW, by + portalH, tw + 0.8], [p.x, by + portalH, tw + 0.8]], cx, cy, '#020617', p.col, 1.5);
+      });
+
+      // 8. Reasoning Effort
+      let topY = by + th;
+      let curW = tw;
+      const tierH = 14;
+      const stepDec = 10;
+      for (let t = 0; t < state.reasoningTiers; t++) {
+        const nextW = curW - stepDec;
+        drawPolygon([[-nextW, topY, nextW], [nextW, topY, nextW], [nextW, topY + tierH, nextW], [-nextW, topY + tierH, nextW]], cx, cy, '#78350f', '#f59e0b', 1.5);
+        drawPolygon([[nextW, topY, -nextW], [nextW, topY, nextW], [nextW, topY + tierH, nextW], [nextW, topY + tierH, -nextW]], cx, cy, '#451a03', '#f59e0b', 1);
+        drawPolygon([[-nextW, topY + tierH, -nextW], [nextW, topY + tierH, -nextW], [nextW, topY + tierH, nextW], [-nextW, topY + tierH, nextW]], cx, cy, '#92400e', '#f59e0b', 1.5);
+        topY += tierH;
+        curW = nextW;
+      }
+
+      // 9. Контекстный шпиль
+      let spireHeight = 65;
+      let spireWidth = 2.5;
+      let isBeacon = false;
+      if (state.context === '1m') {
+        spireHeight = 200;
+        spireWidth = 3.5;
+      } else if (state.context === '10m') {
+        spireHeight = 360;
+        spireWidth = 5.5;
+        isBeacon = true;
+      }
+
+      const sp1 = project(0, topY, 0, cx, cy);
+      const sp2 = project(0, topY + spireHeight, 0, cx, cy);
+
+      ctx.beginPath();
+      ctx.moveTo(sp1.x, sp1.y);
+      ctx.lineTo(sp2.x, sp2.y);
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = spireWidth;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(sp2.x, sp2.y, isBeacon ? 6 : 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#e0f2fe';
+      ctx.shadowColor = '#38bdf8';
+      ctx.shadowBlur = isBeacon ? 20 : 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // Вращение мышью
+    canvas.addEventListener('mousedown', e => {
+      state.isDragging = true;
+      state.lastMouseX = e.clientX;
+      state.lastMouseY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { state.isDragging = false; });
+    window.addEventListener('mousemove', e => {
+      if (!state.isDragging) return;
+      const dx = e.clientX - state.lastMouseX;
+      const dy = e.clientY - state.lastMouseY;
+      state.angle += dx * 0.01;
+      state.pitch = Math.max(0.15, Math.min(1.2, state.pitch + dy * 0.007));
+      state.lastMouseX = e.clientX;
+      state.lastMouseY = e.clientY;
+      draw();
+    });
+
+    // Зум
+    canvas.addEventListener('wheel', e => {
+      e.preventDefault();
+      state.zoom = Math.max(0.5, Math.min(2.5, state.zoom - e.deltaY * 0.0012));
+      draw();
+    }, { passive: false });
+
+    // Тач
+    canvas.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        state.isDragging = true;
+        state.lastMouseX = e.touches[0].clientX;
+        state.lastMouseY = e.touches[0].clientY;
+      }
+    });
+    canvas.addEventListener('touchmove', e => {
+      if (!state.isDragging || e.touches.length !== 1) return;
+      const dx = e.touches[0].clientX - state.lastMouseX;
+      const dy = e.touches[0].clientY - state.lastMouseY;
+      state.angle += dx * 0.012;
+      state.pitch = Math.max(0.15, Math.min(1.2, state.pitch + dy * 0.008));
+      state.lastMouseX = e.touches[0].clientX;
+      state.lastMouseY = e.touches[0].clientY;
+      draw();
+    });
+    canvas.addEventListener('touchend', () => { state.isDragging = false; });
+
+    function setOpenness(isOpen) {
+      state.isOpen = isOpen;
+      document.getElementById('val-openness').innerText = isOpen ? 'Открытые' : 'Закрытые';
+      document.getElementById('sub-status').innerText = isOpen ? 'Стеклянный корпус · Внутренние кубы активных экспертов' : 'Плотный монолитный черный ящик (Black Box)';
+      document.getElementById('btn-open').className = isOpen ? 'text-xs py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 font-medium' : 'text-xs py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700';
+      document.getElementById('btn-closed').className = !isOpen ? 'text-xs py-1.5 rounded-lg bg-slate-700 text-white border border-slate-600 font-medium' : 'text-xs py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700';
+      draw();
+    }
+
+    function setMoE(isMoE) {
+      state.isMoE = isMoE;
+      document.getElementById('val-dense').innerText = isMoE ? 'MoE (~5% кубов)' : 'Dense (Массив)';
+      document.getElementById('btn-moe').className = isMoE ? 'text-xs py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 font-medium' : 'text-xs py-1.5 rounded-lg bg-slate-800 border border-slate-700 hover:bg-slate-700';
+      document.getElementById('btn-dense').className = !isMoE ? 'text-xs py-1.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/50 font-medium' : 'text-xs py-1.5 rounded-lg bg-slate-800 border border-slate-700 hover:bg-slate-700';
+      draw();
+    }
+
+    function setReasoning(tiers) {
+      state.reasoningTiers = tiers;
+      const names = ['0 (Нет)', '1 (Low)', '2 (Med)', '3 (High)'];
+      document.getElementById('val-reasoning').innerText = names[tiers];
+      draw();
+    }
+
+    function setContext(c) {
+      state.context = c;
+      const names = { '128k': '128K', '1m': '1M–2M', '10m': '10M' };
+      document.getElementById('val-context').innerText = names[c];
+      draw();
+    }
+
+    function updateToggles() {
+      state.hasJson = document.getElementById('chk-json').checked;
+      state.hasTools = document.getElementById('chk-tools').checked;
+      state.hasCache = document.getElementById('chk-cache').checked;
+      state.isFog = document.getElementById('chk-fog').checked;
+      draw();
+    }
+
+    function resetCamera() {
+      state.angle = 0.78;
+      state.pitch = 0.52;
+      state.zoom = 1.15;
+      draw();
+    }
+
+    function setPreset(key) {
+      if (key === 'deepseek') {
+        state.name = 'DeepSeek-V4 (Открытый MoE)';
+        state.isOpen = true;
+        state.isMoE = true;
+        state.reasoningTiers = 2;
+        state.context = '128k';
+        state.isFog = false;
+      } else if (key === 'llama') {
+        state.name = 'Llama 4 (Открытый Dense)';
+        state.isOpen = true;
+        state.isMoE = false;
+        state.reasoningTiers = 0;
+        state.context = '10m';
+        state.isFog = false;
+      } else if (key === 'astra') {
+        state.name = 'GPT-6 Astra (Закрытый)';
+        state.isOpen = false;
+        state.isMoE = false;
+        state.reasoningTiers = 3;
+        state.context = '1m';
+        state.isFog = true;
+      } else if (key === 'argon') {
+        state.name = 'Gemini 4 Argon';
+        state.isOpen = false;
+        state.isMoE = false;
+        state.reasoningTiers = 3;
+        state.context = '1m';
+        state.isFog = true;
+      }
+
+      document.getElementById('title-name').innerText = state.name;
+      setOpenness(state.isOpen);
+      setMoE(state.isMoE);
+      setReasoning(state.reasoningTiers);
+      setContext(state.context);
+      document.getElementById('chk-fog').checked = state.isFog;
+      draw();
+    }
+
+    resize();
+  </script>
+</body>
+</html>
